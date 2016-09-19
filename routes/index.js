@@ -2,14 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 // GET /:poll
-router.get('/:poll', function(req, res, next) {
-  if (req.params.poll) {
-		// call database with poll ID provided
-		// pass in info via locals object
-		// render poll template 
-  } else {  	
-  	res.render('index', { title: 'Home' });
-  }
+router.get('/:poll?', function(req, res, next) {
+	if (req.params.poll) {
+		res.render('poll', { title: 'Poll' });
+	} else {
+		res.render('index', { title: 'Home' });
+	}
 });
 
 // POST /
