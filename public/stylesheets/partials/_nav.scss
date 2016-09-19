@@ -1,4 +1,25 @@
 .custom-nav {
-	background: red;
-	height: 50px;
+	background: #068BCC;
+	height: 55px;		
+	color: #fff;
+}
+
+.nav-option {
+	margin-left: 10px;
+	margin-right: 10px;
+	line-height: 55px; // vertically centers text
+
+	&:hover {
+		cursor: pointer;
+		color: #ddd;	
+	}	
+}
+
+.logo {
+	@extend .nav-option;
+	
+	&:hover {
+		cursor: default;
+		color: #fff;
+	}
 }

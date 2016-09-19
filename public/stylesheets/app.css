@@ -1,5 +1,36 @@
 .custom-nav {
-  background: red;
-  height: 50px; }
+  background: #068BCC;
+  height: 55px;
+  color: #fff; }
+
+.nav-option, .logo {
+  margin-left: 10px;
+  margin-right: 10px;
+  line-height: 55px; }
+  .nav-option:hover, .logo:hover {
+    cursor: pointer;
+    color: #ddd; }
+
+.logo:hover {
+  cursor: default;
+  color: #fff; }
+
+.splash-section {
+  height: 500px;
+  background: #fff;
+  position: relative;
+  background: url(../../images/vote-splash.jpg); }
+
+h1 {
+  margin: 0px;
+  position: absolute;
+  top: 25%;
+  left: 25%; }
+
+.polls {
+  background: #068BCC; }
+
+body {
+  background: #eee; }
 
 /*# sourceMappingURL=app.css.map */
