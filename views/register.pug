@@ -4,17 +4,17 @@ block content
 	.row
 		.col-md-6.col-md-offset-3
 			h1 Sign Up
-			form(method="POST" action="/register")
+			form(method="POST", action="/register")
 				.form-group
-					label(for="username") Register a username:
-					input.form-control#username(type="text" placeholder="Enter a username")
+					label(for="registerUsername") Register a username:
+					input.form-control#registerUsername(type="text", placeholder="Enter a username")
 				.form-group
-					label(for="email") Email address:
-					input.form-control#email(type="email" placeholder="Enter your email address")
+					label(for="registerEmail") Email address:
+					input.form-control#registerEmail(type="email", placeholder="Enter your email address")
 				.form-group
-					label(for="password") Password:
-					input.form-control#password(type="password" placeholder="Enter a password")
+					label(for="registerPassword") Password:
+					input.form-control#registerPassword(type="password", placeholder="Enter a password")
 				.form-group
 					label(for="passwordConfirm") Confirm password:
-					input.form-control#passwordConfirm(type="password" placeholder="Confirm your password")
+					input.form-control#passwordConfirm(type="password", placeholder="Confirm your password")
 				button.btn.btn-info(type="submit") Submit Details
