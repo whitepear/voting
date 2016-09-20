@@ -1,6 +1,9 @@
 // ////////////////////////////////
 // INDEX.PUG CODE
 
+// POTENTIAL IMPROVEMENT: Keep array tracking recently rendered subjects,
+// preventing repetition of subjects rendered to screen
+
 // this code progressively prints out the text of baseString as
 // though it were being typed out by a person on a terminal.
 // when the baseString is fully printed to screen, the code progressively
@@ -12,7 +15,7 @@
 var baseString = 'Let\'s vote on ';
 var baseCounter = 1; // counter for progressively increasing slice length on baseString
 var subjectCounter = 1; // counter for progressively increasing slice length on subjectText
-var subjectTexts = ['sports.','ice-cream.','videogames.','action films.','jazz bands.','colours.','fashion.', 
+var subjects = ['sports.','ice-cream.','videogames.','action films.','jazz bands.','colours.','fashion.', 
 		'literature.','paintings.','photography.','animals.','architecture.','telephones.','cartoons.','bicycles.',
 		'composers.','cars.','board-games.','planets.','sitcoms.','seafood.','kitchenware.','fireworks.','history.',
 		'gymnastics.','turntables.','fruits.','house-plants.','genres.','waterfalls.','fancy hats.',
@@ -20,12 +23,13 @@ var subjectTexts = ['sports.','ice-cream.','videogames.','action films.','jazz b
 		'guitars.'];
 var newSubjectNeeded = true; // flag for selecting new subject string
 var subjectRemovalNeeded = false; // flag for progressively removing subject string
-var currentSubjectText = ''; // var to hold the subject text currently being appended/removed
+var currentSubject = ''; // var to hold the subject text currently being appended/removed
+var recentSubjects = []; // this array tracks the 5 most recently rendered subjects
 var completedCounter = 0; // var to count time completed subject is on-screen for.
 
 function randomSubject () {
-	// this function randomly picks an element from the subjectTexts array
-	return subjectTexts[Math.floor(Math.random()*subjectTexts.length)];
+	// this function randomly picks an element from the subjects array
+	return subjects[Math.floor(Math.random()*subjects.length)];
 }
 
 var stringInterval = setInterval(function() {	
@@ -37,7 +41,7 @@ var stringInterval = setInterval(function() {
 	} else {
 		// progressively append/remove subject string.
 		if (newSubjectNeeded) {
-			currentSubjectText = randomSubject();
+			currentSubject = randomSubject();
 			newSubjectNeeded = false;
 		}
 		
@@ -45,7 +49,7 @@ var stringInterval = setInterval(function() {
 			// remove subject
 			if ($('.splash-text').text() !== 'Let\'s vote on ') {
 				// if subject string is not fully removed, remove one more letter
-				$('.splash-text').text(baseString + currentSubjectText.slice(0, subjectCounter));
+				$('.splash-text').text(baseString + currentSubject.slice(0, subjectCounter));
 				subjectCounter--;
 			} else {
 				// reset counters and flags in preparation for new subject append
@@ -55,9 +59,9 @@ var stringInterval = setInterval(function() {
 			}
 		}	else {
 			// append subject
-			if (subjectCounter <= currentSubjectText.length) {		
+			if (subjectCounter <= currentSubject.length) {		
 				// if the subject is not fully appended, append one more letter		
-				$('.splash-text').text(baseString + currentSubjectText.slice(0, subjectCounter));
+				$('.splash-text').text(baseString + currentSubject.slice(0, subjectCounter));
 				subjectCounter++;
 			} else {
 				// this section provides a 'delay', allowing the completed subject
