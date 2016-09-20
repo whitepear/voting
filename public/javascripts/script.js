@@ -12,15 +12,16 @@
 var baseString = 'Let\'s vote on ';
 var baseCounter = 1; // counter for progressively increasing slice length on baseString
 var subjectCounter = 1; // counter for progressively increasing slice length on subjectText
-var subjectTexts = ['sports.','ice-cream.','videogames.','action movies.','jazz bands.','colours.','fashion.', 
+var subjectTexts = ['sports.','ice-cream.','videogames.','action films.','jazz bands.','colours.','fashion.', 
 		'literature.','paintings.','photography.','animals.','architecture.','telephones.','cartoons.','bicycles.',
 		'composers.','cars.','board-games.','planets.','sitcoms.','seafood.','kitchenware.','fireworks.','history.',
-		'gymnastics.','record players.','fruits.','house-plants.','genres.','waterfalls.','deep-sea diving.',
-		'parkour.','weightlifting.','handwriting.','camping.','chocolate.','horror films.','hairstyles.',
-		'pizza toppings.','guitars.'];
+		'gymnastics.','turntables.','fruits.','house-plants.','genres.','waterfalls.','fancy hats.',
+		'parkour.','weightlifting.','handwriting.','camping.','chocolate.','ghost stories.','hairstyles.',
+		'guitars.'];
 var newSubjectNeeded = true; // flag for selecting new subject string
 var subjectRemovalNeeded = false; // flag for progressively removing subject string
 var currentSubjectText = ''; // var to hold the subject text currently being appended/removed
+var completedCounter = 0; // var to count time completed subject is on-screen for.
 
 function randomSubject () {
 	// this function randomly picks an element from the subjectTexts array
@@ -28,9 +29,10 @@ function randomSubject () {
 }
 
 var stringInterval = setInterval(function() {	
+
 	if (baseCounter <= baseString.length) {
 		// progressively generate base string.
-		$('.splash-text').text(baseString.slice(0, baseCounter) + '|');
+		$('.splash-text').text(baseString.slice(0, baseCounter));
 		baseCounter++;
 	} else {
 		// progressively append/remove subject string.
@@ -41,16 +43,34 @@ var stringInterval = setInterval(function() {
 		
 		if (subjectRemovalNeeded) {
 			// remove subject
-			if (false) {
-
+			if ($('.splash-text').text() !== 'Let\'s vote on ') {
+				// if subject string is not fully removed, remove one more letter
+				$('.splash-text').text(baseString + currentSubjectText.slice(0, subjectCounter));
+				subjectCounter--;
+			} else {
+				// reset counters and flags in preparation for new subject append
+				newSubjectNeeded = true;
+				subjectRemovalNeeded = false;
+				subjectCounter = 0;
 			}
 		}	else {
 			// append subject
-			if (subjectCounter <= currentSubjectText.length) {				
-				$('.splash-text').text(baseString + currentSubjectText.slice(0, subjectCounter) + '|');
+			if (subjectCounter <= currentSubjectText.length) {		
+				// if the subject is not fully appended, append one more letter		
+				$('.splash-text').text(baseString + currentSubjectText.slice(0, subjectCounter));
 				subjectCounter++;
+			} else {
+				// this section provides a 'delay', allowing the completed subject
+				// string to remain on-screen for a few moments.
+				// once this period is complete, variables are set to prep for removal
+				// of the subject string.										
+				completedCounter++;
+				if (completedCounter === 3) {						
+					subjectRemovalNeeded = true;
+					completedCounter = 0;
+					subjectCounter = -1;
+				}				
 			}
-		}	
-		
+		}			
 	}	
 }, 100);
