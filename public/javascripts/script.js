@@ -24,16 +24,11 @@ var subjects = ['sports.','ice-cream.','videogames.','action films.','jazz bands
 var newSubjectNeeded = true; // flag for selecting new subject string
 var subjectRemovalNeeded = false; // flag for progressively removing subject string
 var currentSubject = ''; // var to hold the subject text currently being appended/removed
-var recentSubjects = []; // this array tracks the 5 most recently rendered subjects
+var recentSubjects = ['','','','','']; // this array tracks the 5 most recently rendered subjects
 var completedCounter = 0; // var to count time completed subject is on-screen for.
 
-function randomSubject () {
-	// this function randomly picks an element from the subjects array
-	return subjects[Math.floor(Math.random()*subjects.length)];
-}
-
 var stringInterval = setInterval(function() {	
-
+	
 	if (baseCounter <= baseString.length) {
 		// progressively generate base string.
 		$('.splash-text').text(baseString.slice(0, baseCounter));
@@ -41,7 +36,7 @@ var stringInterval = setInterval(function() {
 	} else {
 		// progressively append/remove subject string.
 		if (newSubjectNeeded) {
-			currentSubject = randomSubject();
+			currentSubject = randomNewSubject();
 			newSubjectNeeded = false;
 		}
 		
@@ -78,3 +73,23 @@ var stringInterval = setInterval(function() {
 		}			
 	}	
 }, 100);
+
+function randomNewSubject() {
+	// this function returns a random element from the subjects array,
+	// and makes sure that it has not appeared in the previous 5 subject renders
+	// before returning it
+
+	var generatedSubject = randomSubject();
+	if (recentSubjects.indexOf(generatedSubject) > -1) {
+		return randomNewSubject();
+	} else {
+		recentSubjects.pop();
+		recentSubjects.unshift(generatedSubject);
+		return generatedSubject;
+	}
+
+	function randomSubject () {
+		// this function randomly picks an element from the subjects array
+		return subjects[Math.floor(Math.random()*subjects.length)];
+	}
+}
