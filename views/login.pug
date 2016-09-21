@@ -7,8 +7,8 @@ block content
 			form(method="POST", action="/login")
 				.form-group
 					label(for="loginUsername") Enter your username:
-					input.form-control#loginUsername(type="text", placeholder="Enter your username")
+					input.form-control#loginUsername(type="text", placeholder="Enter your username", required)
 				.form-group
 					label(for="loginPassword") Enter your password:
-					input.form-control#loginPassword(type="text", placeholder="Enter your password")
+					input.form-control#loginPassword(type="text", placeholder="Enter your password", required)
 				button.btn.btn-info(type="submit") Log In

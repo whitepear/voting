@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 public/stylesheets/.sass-cache
 public/stylesheets/app.css.map
+data
