@@ -7,14 +7,14 @@ block content
 			form(method="POST", action="/register")
 				.form-group
 					label(for="registerUsername") Register a username:
-					input.form-control#registerUsername(type="text", placeholder="Enter a username", required)
+					input.form-control#registerUsername(type="text", placeholder="Enter a username", name="username", required)
 				.form-group
 					label(for="registerEmail") Email address:
-					input.form-control#registerEmail(type="email", placeholder="Enter your email address", required)
+					input.form-control#registerEmail(type="email", placeholder="Enter your email address", name="email", required)
 				.form-group
 					label(for="registerPassword") Password:
-					input.form-control#registerPassword(type="password", placeholder="Enter a password", required)
+					input.form-control#registerPassword(type="password", placeholder="Enter a password", name="password", required)
 				.form-group
 					label(for="passwordConfirm") Confirm password:
-					input.form-control#passwordConfirm(type="password", placeholder="Confirm your password", required)
+					input.form-control#passwordConfirm(type="password", placeholder="Confirm your password", name="confirmPassword", required)
 				button.btn.btn-info(type="submit") Submit Details
