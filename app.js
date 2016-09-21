@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
@@ -15,6 +16,13 @@ mongoose.connect("mongodb://localhost:27017/voht");
 var db = mongoose.connection;
 // mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
+
+// express-session for tracking logins
+app.use(session({  
+  secret: 'lets vote on stuff',  
+  resave: true,  
+  saveUninitialized: false,
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
