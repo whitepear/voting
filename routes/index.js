@@ -62,7 +62,22 @@ router.get('/login', function(req, res, next) {
 // POST /login
 
 router.post('/login', function(req, res, next) {
-	res.send('Logged in.');
+	if (req.body.username && req.body.password) {
+		User.authenticate(req.body.email, req.body.password, function(err, user) {
+			if (err || !user) {
+				var err = new Error('Wrong email or password.');
+				err.status = 401;
+				next(err);
+			} else {		
+				req.session.userId = user._id;
+				res.redirect('/');
+			}
+		});
+	} else {
+		var err = new Error('Please make sure both fields are filled in.');
+		err.status = 401; // unauthorized/bad authentication
+		next(err);
+	}
 });
 
 module.exports = router;

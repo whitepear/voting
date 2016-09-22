@@ -18,7 +18,8 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 // express-session for tracking logins
-app.use(session({  
+app.use(session({
+  name: 'sessionId',  
   secret: 'lets vote on stuff',  
   resave: true,  
   saveUninitialized: false,
