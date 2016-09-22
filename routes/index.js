@@ -60,7 +60,6 @@ router.get('/login', function(req, res, next) {
 });
 
 // POST /login
-
 router.post('/login', function(req, res, next) {
 	if (req.body.username && req.body.password) {
 		User.authenticate(req.body.email, req.body.password, function(err, user) {
@@ -78,6 +77,24 @@ router.post('/login', function(req, res, next) {
 		err.status = 401; // unauthorized/bad authentication
 		next(err);
 	}
+});
+
+// GET /profile
+router.get('/profile', function(req, res, next) {
+	if (!req.session.userId) {
+		var err = new Error('You are not authorized to view this page.');
+		err.status = 403; // 'forbidden'
+		next(err);
+	}
+	
+	User.findById(req.session.userId)
+			.exec(function (err, user) {
+				if (err) {
+					next(err);
+				} else {
+					res.render('profile', {title: 'Profile', name: user.name});
+				}
+			});
 });
 
 module.exports = router;
