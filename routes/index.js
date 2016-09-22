@@ -62,9 +62,9 @@ router.get('/login', function(req, res, next) {
 // POST /login
 router.post('/login', function(req, res, next) {
 	if (req.body.username && req.body.password) {
-		User.authenticate(req.body.email, req.body.password, function(err, user) {
+		User.authenticate(req.body.username, req.body.password, function(err, user) {
 			if (err || !user) {
-				var err = new Error('Wrong email or password.');
+				var err = new Error('Wrong username or password.');
 				err.status = 401;
 				next(err);
 			} else {		
@@ -86,13 +86,13 @@ router.get('/profile', function(req, res, next) {
 		err.status = 403; // 'forbidden'
 		next(err);
 	}
-	
+
 	User.findById(req.session.userId)
 			.exec(function (err, user) {
 				if (err) {
 					next(err);
 				} else {
-					res.render('profile', {title: 'Profile', name: user.name});
+					res.render('profile', {title: 'Profile', name: user.username});
 				}
 			});
 });
