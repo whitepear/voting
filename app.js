@@ -25,6 +25,12 @@ app.use(session({
   saveUninitialized: false,
 }));
 
+// add session info to locals object
+app.use(function (req, res, next) {
+  res.locals.currentUser = req.session.userId;
+  next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

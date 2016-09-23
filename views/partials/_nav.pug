@@ -1,5 +1,9 @@
 .custom-nav
-	a.logo.pull-left Voht	
-	a.nav-option.pull-right(href="/register") Register
-	a.nav-option.pull-right(href="/login") Login
+	a.logo.pull-left Voht
+	if !currentUser	
+		a.nav-option.pull-right(href="/register") Register
+	if currentUser
+		a.nav-option.pull-right(href='/logout') Log Out
+	else 		
+		a.nav-option.pull-right(href="/login") Login
 	a.nav-option.pull-right(href="/") Home
