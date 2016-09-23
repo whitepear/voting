@@ -6,9 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require('mongoose');
-
 var routes = require('./routes/index');
-
+var MongoStore = require('connect-mongo')(session); // require and call with session in order to allow connect-mongo middleware to access sessions
 var app = express();
 
 // mongodb connection
@@ -23,6 +22,9 @@ app.use(session({
   secret: 'lets vote on stuff',  
   resave: true,  
   saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
 }));
 
 // add session info to locals object
