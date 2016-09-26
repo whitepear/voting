@@ -1,9 +1,6 @@
 // ////////////////////////////////
 // INDEX.PUG CODE
 
-// POTENTIAL IMPROVEMENT: Keep array tracking recently rendered subjects,
-// preventing repetition of subjects rendered to screen
-
 // this code progressively prints out the text of baseString as
 // though it were being typed out by a person on a terminal.
 // when the baseString is fully printed to screen, the code progressively

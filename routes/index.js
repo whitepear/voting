@@ -44,7 +44,9 @@ router.post('/register', function (req, res, next) {
 				if (err) {
 					next(err);
 				} else {
-					res.redirect('/');
+					// this session assignment causes a person to automatically log in upon registration.
+					req.session.userId = user._id;
+					res.redirect('/profile');
 				}
 			});
 		}
@@ -95,7 +97,7 @@ router.get('/logout', function(req, res, next) {
 });
 
 // GET /profile
-router.get('/profile', mid.loggedIn, function(req, res, next) {
+router.get('/profile', mid.loggedIn, function(req, res, next) {	
 	User.findById(req.session.userId)
 			.exec(function (err, user) {
 				if (err) {
