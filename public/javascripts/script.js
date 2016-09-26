@@ -90,3 +90,14 @@ function randomNewSubject() {
 		return subjects[Math.floor(Math.random()*subjects.length)];
 	}
 }
+
+
+// ////////////////////////////////
+// PROFILE.PUG CODE
+
+var inputCounter = 3;
+
+$('#addOption').click(function() {	
+	$('#optionGroup').append('<input class="form-control" id="pollOption' + inputCounter + '" type="text" name="pollOption' + inputCounter + '"></input>');
+	inputCounter++;
+});
