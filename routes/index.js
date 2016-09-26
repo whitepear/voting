@@ -103,9 +103,24 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 				if (err) {
 					next(err);
 				} else {
-					res.render('profile', {title: 'Profile', name: user.username});
+					var currentHour = (new Date()).getHours();
+					if (currentHour >= 5 && currentHour < 12) {
+						var timeOfDay = 'this morning';
+					} else if (currentHour >= 12 && currentHour < 5) {
+						timeOfDay = 'this afternoon';
+					} else if (currentHour >= 5 && currentHour < 8) {
+						timeOfDay = 'this evening';
+					} else {
+						timeOfDay = 'tonight';
+					}
+					res.render('profile', {title: 'Profile', name: user.username, timeOfDay: timeOfDay });
 				}
 			});
+});
+
+// POST /profile
+router.post('/profile', function(req, res) {
+	res.send('Hello.');
 });
 
 module.exports = router;
