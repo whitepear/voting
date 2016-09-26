@@ -8,15 +8,19 @@
 	margin-left: 10px;
 	margin-right: 10px;
 	line-height: 55px; // vertically centers text
+	color: #fff;	
 
 	&:hover {
 		cursor: pointer;
 		color: #ddd;	
+		text-decoration: none;
 	}	
 }
 
 .logo {
 	@extend .nav-option;
+	font-size: 26px;
+	margin-left: 20px;
 	
 	&:hover {
 		cursor: default;
