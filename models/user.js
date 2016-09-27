@@ -17,7 +17,11 @@ var UserSchema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: true
-	}
+	},
+	polls: [{
+		pollName: String,
+		pollOptions: []
+	}]
 });
 
 UserSchema.statics.authenticate = function(username, password, callback) {

@@ -36,7 +36,8 @@ router.post('/register', function (req, res, next) {
 			var userData = {
 				username: req.body.username,
 				email: req.body.email,
-				password: req.body.password
+				password: req.body.password,
+				polls: []
 			};
 			// use the schema's create method to insert a new document into database,
 			// based on the model specified by the schema
