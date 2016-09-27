@@ -106,9 +106,9 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 					var currentHour = (new Date()).getHours();
 					if (currentHour >= 5 && currentHour < 12) {
 						var timeOfDay = 'this morning';
-					} else if (currentHour >= 12 && currentHour < 5) {
+					} else if (currentHour >= 12 && currentHour < 17) {
 						timeOfDay = 'this afternoon';
-					} else if (currentHour >= 5 && currentHour < 8) {
+					} else if (currentHour >= 17 && currentHour < 20) {
 						timeOfDay = 'this evening';
 					} else {
 						timeOfDay = 'tonight';
@@ -120,7 +120,7 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 
 // POST /profile
 router.post('/profile', function(req, res) {
-	res.send('Hello.');
+	res.send(req.body);
 });
 
 module.exports = router;
