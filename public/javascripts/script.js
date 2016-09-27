@@ -10,7 +10,7 @@
 
 // declare variables for use within function
 var baseString = 'Let\'s vote on ';
-$splash = $('.splash-text');
+var $splash = $('.splash-text');
 var baseCounter = 1; // counter for progressively increasing slice length on baseString
 var subjectCounter = 1; // counter for progressively increasing slice length on subjectText
 var subjects = ['sports.','ice-cream.','videogames.','action films.','jazz bands.','colours.','fashion.', 
@@ -98,6 +98,18 @@ function randomNewSubject() {
 
 // Profile Option Buttons
 
+var $creationForm = $('#creationForm');
+var $myPolls = $('#myPollList');
+
+$('#profileCreatePoll').click(function() {
+	$creationForm.show();
+	$myPolls.hide();
+});
+
+$('#profileMyPolls').click(function() {
+	$creationForm.hide();
+	$myPolls.show();
+});
 
 
 // Poll Creation Code
