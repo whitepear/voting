@@ -4,10 +4,11 @@ block content
 	.col-xs-12.text-center Hello, #{name}!
 	.col-xs-12.text-center What would you like to do #{timeOfDay}?
 	.col-xs-12.text-center
-		btn.btn.btn-success Create Poll	
-		btn.btn.btn-info My Polls
+		button.btn.btn-success#profileCreatePoll(type="button") Create Poll	
+		button.btn.btn-info#profileMyPolls(type="button") My Polls
+
 	// Poll Creation
-	.col-xs-12
+	.col-xs-12#creationForm
 		form(method="POST", action="/profile")
 			.form-group
 				label(for="pollName") Name your poll:
@@ -20,6 +21,11 @@ block content
 			button.btn.btn-info(type="submit") Submit
 
 	// My Polls
-	.col-xs-12
-
+	.col-xs-12#myPollList
+		// each poll in polls
+		h1 I am just placeholder information.
+		h2 Me too.
+		h2 So am I.
+		hr
+		h2 I'm here also!
 			

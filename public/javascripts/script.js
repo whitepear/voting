@@ -10,6 +10,7 @@
 
 // declare variables for use within function
 var baseString = 'Let\'s vote on ';
+$splash = $('.splash-text');
 var baseCounter = 1; // counter for progressively increasing slice length on baseString
 var subjectCounter = 1; // counter for progressively increasing slice length on subjectText
 var subjects = ['sports.','ice-cream.','videogames.','action films.','jazz bands.','colours.','fashion.', 
@@ -28,7 +29,7 @@ var stringInterval = setInterval(function() {
 	
 	if (baseCounter <= baseString.length) {
 		// progressively generate base string.
-		$('.splash-text').text(baseString.slice(0, baseCounter));
+		$splash.text(baseString.slice(0, baseCounter));
 		baseCounter++;
 	} else {
 		// progressively append/remove subject string.
@@ -39,9 +40,9 @@ var stringInterval = setInterval(function() {
 		
 		if (subjectRemovalNeeded) {
 			// remove subject
-			if ($('.splash-text').text() !== 'Let\'s vote on ') {
+			if ($splash.text() !== 'Let\'s vote on ') {
 				// if subject string is not fully removed, remove one more letter
-				$('.splash-text').text(baseString + currentSubject.slice(0, subjectCounter));
+				$splash.text(baseString + currentSubject.slice(0, subjectCounter));
 				subjectCounter--;
 			} else {
 				// reset counters and flags in preparation for new subject append
@@ -53,7 +54,7 @@ var stringInterval = setInterval(function() {
 			// append subject
 			if (subjectCounter <= currentSubject.length) {		
 				// if the subject is not fully appended, append one more letter		
-				$('.splash-text').text(baseString + currentSubject.slice(0, subjectCounter));
+				$splash.text(baseString + currentSubject.slice(0, subjectCounter));
 				subjectCounter++;
 			} else {
 				// this section provides a 'delay', allowing the completed subject
@@ -94,6 +95,12 @@ function randomNewSubject() {
 
 // ////////////////////////////////
 // PROFILE.PUG CODE
+
+// Profile Option Buttons
+
+
+
+// Poll Creation Code
 
 var inputCounter = 3;
 
