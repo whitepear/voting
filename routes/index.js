@@ -120,7 +120,18 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 
 // POST /profile
 router.post('/profile', function(req, res) {
-	res.send(req.body);
+	var formKeys = Object.keys(req.body);
+	var pollName = req.body[formKeys[0]];
+	var pollOptions = [];
+	for (var i = 1; i < formKeys.length; i++) {
+		pollOptions.push(req.body[formKeys[i]]);
+	}
+	User.update({_id: req.session.userId}, {$push: {polls: {
+		pollName: pollName,
+		pollOptions: pollOptions
+	}}}, function() {
+		res.redirect('/');
+	});		
 });
 
 module.exports = router;
