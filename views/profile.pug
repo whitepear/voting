@@ -1,5 +1,25 @@
 extends layout
 
-block content
-	.col-sm-6.col-md-4 #{name}
-	.col-sm-6.col-md-4 Poll Info will appear here.
+block content	
+	.col-xs-12.text-center Hello, #{name}!
+	.col-xs-12.text-center What would you like to do #{timeOfDay}?
+	.col-xs-12.text-center
+		btn.btn.btn-success Create Poll	
+		btn.btn.btn-info My Polls
+	// Poll Creation
+	.col-xs-12
+		form(method="POST", action="/profile")
+			.form-group
+				label(for="pollName") Name your poll:
+				input.form-control#pollName(type="text", name="pollName", placeholder="What is your favourite color?", required)
+			.form-group#optionGroup
+				label(for="pollOption1") Enter options:
+				input.form-control#pollOption1(type="text", name="pollOption1", placeholder="Red")
+				input.form-control#pollOption2(type="text", name="pollOption2", placeholder="Blue")
+			button.btn.btn-default#addOption(type="button") Add Option			
+			button.btn.btn-info(type="submit") Submit
+
+	// My Polls
+	.col-xs-12
+
+			
