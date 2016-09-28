@@ -3,11 +3,19 @@ extends layout
 block content
 	.splash-section
 		h1.splash-text 
-		.reg-prompt 
-			p.reg-header Register an account to create polls.
-			btn.signup-btn.btn-lg.btn-success Sign Up &amp; Get Started
-	.polls
+		if !currentUser
+			.reg-prompt 
+				p.reg-header Create custom polls with live results.
+				btn.signup-btn.btn-lg Sign Up &amp; Get Started
+	.divider
+	.polls Polls.
+		hr
 		.row
-			.col-xs-4.text-center I'm a poll!
-			.col-xs-4.text-center So am I!
-			.col-xs-4.text-center Me too!
+			- for (var i = 0; i < userDocs.length; i++) {				
+			- for (var j = 0; j < userDocs[i].polls.length; j++) {
+			.col-xs-12.poll-item
+				a(href="polls/" + userDocs[i].polls[j]._id)
+					h3 #{userDocs[i].polls[j].pollName}
+					h4.hidden-xs #{userDocs[i].username}
+			- }
+			- }
