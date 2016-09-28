@@ -20,7 +20,8 @@ var UserSchema = new mongoose.Schema({
 	},
 	polls: [{
 		pollName: String,
-		pollOptions: []
+		pollOptions: [],
+		createdOn: { type: Date, default: Date.now }
 	}]
 });
 
