@@ -1,7 +1,7 @@
 extends layout
 
 block content	
-	.col-xs-12.text-center Hello, #{name}!
+	.col-xs-12.text-center Hello, #{userDoc.username}!
 	.col-xs-12.text-center What would you like to do #{timeOfDay}?
 	.col-xs-12.text-center
 		button.btn.btn-success#profileCreatePoll(type="button") Create Poll	
@@ -21,11 +21,9 @@ block content
 			button.btn.btn-info(type="submit") Submit
 
 	// My Polls
-	.col-xs-12#myPollList
-		// each poll in polls
-		h1 I am just placeholder information.
-		h2 Me too.
-		h2 So am I.
-		hr
-		h2 I'm here also!
-			
+	#myPollList
+		each poll in userDoc.polls
+			.col-xs-12
+				a(href='poll/' + poll._id)
+					h3 #{poll.pollName}
+					h4 #{poll.createdOn}

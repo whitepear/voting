@@ -14,7 +14,7 @@ block content
 			- for (var i = 0; i < userDocs.length; i++) {				
 			- for (var j = 0; j < userDocs[i].polls.length; j++) {
 			.col-xs-12.poll-item
-				a(href="polls/" + userDocs[i].polls[j]._id)
+				a(href="poll/" + userDocs[i].polls[j]._id)
 					h3 #{userDocs[i].polls[j].pollName}
 					h4.hidden-xs #{userDocs[i].username}
 			- }

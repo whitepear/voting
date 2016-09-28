@@ -136,7 +136,7 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 					} else {
 						timeOfDay = 'tonight';
 					}
-					res.render('profile', {title: 'Profile', name: user.username, timeOfDay: timeOfDay });
+					res.render('profile', {title: 'Profile', userDoc: user, timeOfDay: timeOfDay });
 				}
 			});
 });
