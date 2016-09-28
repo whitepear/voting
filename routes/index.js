@@ -11,8 +11,7 @@ router.get('/', function(req, res, next) {
 			err.status = 500; // internal server error
 			next(err);
 		} else {			
-			console.log(docs);
-			//res.render('index', { title: 'Home', userDocs: docs });
+			res.render('index', { title: 'Home', userDocs: docs });
 		}				
 	});	
 });
@@ -20,6 +19,24 @@ router.get('/', function(req, res, next) {
 // POST /
 
 // GET /poll
+router.get('/poll/:pollId', function(req, res, next) {
+	User.findOne({"polls._id": req.params.pollId}, { email: 0, password: 0, __v: 0 }, function(err, doc) {
+		if (err) {
+			var err = new Error('Database query for GET "/poll/:pollId" failed.');
+			err.status = 500; // internal server error
+			next(err);
+		} else {	
+			// remove the nested poll documents within the returned document 
+			// that do not have the _id passed as a route param
+			var unfilteredPolls = doc.polls;
+			var filteredPoll = unfilteredPolls.filter(function(poll) {
+				return poll._id == req.params.pollId;
+			});			
+			doc.polls = filteredPoll;
+			res.render('poll', { title: 'Poll', poll: doc });
+		}
+	});
+});
 
 // POST /poll
 
