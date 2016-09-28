@@ -5,11 +5,15 @@ var User = require('../models/user.js');
 
 // GET /
 router.get('/', function(req, res, next) {
-	if (req.params.poll) {
-		res.render('poll', { title: 'Poll' });
-	} else {
-		res.render('index', { title: 'Home' });
-	}
+	User.find({ polls: { $gt: [] } }, { email: 0, password: 0, __v: 0 }, function(err, docs) {
+		if (err) {
+			var err = new Error('Database query for GET "/" failed.');
+			err.status = 500; // internal server error
+			next(err);
+		} else {			
+			res.render('index', { title: 'Home', userDocs: docs });
+		}				
+	});	
 });
 
 // POST /
