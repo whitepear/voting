@@ -33,7 +33,7 @@ router.get('/poll/:pollId', function(req, res, next) {
 				return poll._id == req.params.pollId;
 			});			
 			doc.polls = filteredPoll;
-			res.render('poll', { title: 'Poll', singlePoll: JSON.stringify(doc) });
+			res.render('poll', { title: 'Poll', singleUser: JSON.stringify(doc) });
 		}
 	});
 });
@@ -147,7 +147,9 @@ router.post('/profile', function(req, res) {
 	var pollName = req.body[formKeys[0]];
 	var pollOptions = [];
 	for (var i = 1; i < formKeys.length; i++) {
-		pollOptions.push(req.body[formKeys[i]]);
+		pollOptions.push({
+			optionName: req.body[formKeys[i]]
+		});
 	}
 	User.update({_id: req.session.userId}, {$push: {polls: {
 		pollName: pollName,
