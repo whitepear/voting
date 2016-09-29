@@ -1,6 +1,10 @@
 @import 'partials/_nav';
 @import 'partials/_index';
+@import 'partials/_profile';
+@import 'partials/_poll';
 
 body {
+	font-size: 18px;
 	background: #eee;
+	font-family: 'Raleway', sans-serif;
 }
