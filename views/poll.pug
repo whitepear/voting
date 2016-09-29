@@ -1,5 +1,11 @@
-div Hello.
+extends layout
+
+block content
+	.row
+		.col-xs-12.col-sm-6.pull-right
+			canvas#pollChart
+		.col-xs-12.col-sm-6.pull-left
+			h2 Options go here.
 
 
-
-script var userPoll = !{singlePoll};
+	script var singleUser = !{singleUser};

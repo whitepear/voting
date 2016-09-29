@@ -120,3 +120,44 @@ $('#addOption').click(function() {
 	$('#optionGroup').append('<input class="form-control" id="pollOption' + inputCounter + '" type="text" name="pollOption' + inputCounter + '"></input>');
 	inputCounter++;
 });
+
+
+// ////////////////////////////////
+// POLL.PUG CODE
+
+var optionNames = singleUser.polls[0].pollOptions.map(function(pollOption) {
+	return pollOption.optionName;
+});
+
+var votes = singleUser.polls[0].pollOptions.map(function(pollOption) {
+	return pollOption.votes;
+});
+
+var backgroundColours = optionNames.map(function() {
+	return randomColour();
+});
+
+var ctx = $('#pollChart');
+var doughnutPoll = new Chart(ctx, {
+	type: 'doughnut',
+  data: {
+  	labels: optionNames,
+  	datasets: [
+  		{
+				data: votes,
+				backgroundColor: backgroundColours
+  		}			
+  	]
+  } 
+});
+
+
+function randomColour() {
+	// generate a random hex colour
+	var hexChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+	var colour = '#';
+	for (var i = 0; i < 6; i++) {
+    colour += hexChars[Math.floor(Math.random() * 16)];
+  }
+  return colour;
+}
