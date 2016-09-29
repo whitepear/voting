@@ -33,7 +33,7 @@ router.get('/poll/:pollId', function(req, res, next) {
 				return poll._id == req.params.pollId;
 			});			
 			doc.polls = filteredPoll;
-			res.render('poll', { title: 'Poll', poll: doc });
+			res.render('poll', { title: 'Poll', singlePoll: JSON.stringify(doc) });
 		}
 	});
 });
