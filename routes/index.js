@@ -15,8 +15,8 @@ router.get('/', function(req, res, next) {
 		{ $limit: itemsPerPage },
 		{ $project: {
 			_id: 0,
-			"polls.pollName": 1,
-			"polls._id": 1		
+			pollName: "$polls.pollName",
+			pollId: "$polls._id"		
 		} }
 	], function(err, docs) {
 		if (err) {
@@ -24,6 +24,7 @@ router.get('/', function(req, res, next) {
 			err.status = 500; // internal server error
 			next(err);
 		} else {			
+			console.log(docs);
 			res.render('index', { title: 'Home', userPolls: docs });
 		}	
 	});	
