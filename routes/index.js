@@ -4,15 +4,28 @@ var mid = require('../middleware');
 var User = require('../models/user.js');
 
 // GET /
-router.get('/', function(req, res, next) {
-	User.find({ polls: { $gt: [] } }, { email: 0, password: 0, __v: 0 }, { sort: {"polls.createdOn": -1} }, function(err, docs) {
+router.get('/', function(req, res, next) {	
+	var itemsPerPage = 4;
+	var page = req.query.page ? parseInt(req.query.page) : 0;
+	User.aggregate([
+		{ $match: { polls: { $gt: [] } } },			
+		{ $unwind: "$polls" },
+		{ $sort: { "polls.createdOn": -1 } },
+		{ $skip: page * itemsPerPage },
+		{ $limit: itemsPerPage },
+		{ $project: {
+			_id: 0,
+			"polls.pollName": 1,
+			"polls._id": 1		
+		} }
+	], function(err, docs) {
 		if (err) {
 			var err = new Error('Database query for GET "/" failed.');
 			err.status = 500; // internal server error
 			next(err);
 		} else {			
-			res.render('index', { title: 'Home', userDocs: docs });
-		}				
+			res.render('index', { title: 'Home', userPolls: docs });
+		}	
 	});	
 });
 
