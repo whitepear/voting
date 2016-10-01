@@ -6,12 +6,20 @@ block content
 		if !currentUser
 			.reg-prompt 
 				p.reg-header Create custom polls with live results.
-				a.signup-btn.btn-lg(type="button", href="register") Sign Up &amp; Get Started
+				a.signup-btn.btn-lg(href="register") Sign Up &amp; Get Started
+		else
+			.reg-prompt
+				p.reg-header Start creating polls now!
+				a.signup-btn.btn-lg(href="profile") Create A Poll
 	.divider
 	.polls Polls.
 		hr
-		.row
-			each userPoll in userPolls
-				.col-xs-12.poll-item
+		each userPoll in userPolls
+			.row
+				.col-xs-12.poll-item.text-center
 					a(href="poll/" + userPoll.pollId)
 						h3 #{userPoll.pollName}
+		if pageNumber > 0
+			a.btn.btn-info(href="/?page=" + (pageNumber - 1)) Prev
+		if !(((pageNumber * itemsPerPage) + itemsPerPage) >= totalDocs)
+			a.btn.btn-info(href="/?page=" + (pageNumber + 1)) Next
