@@ -5,18 +5,25 @@ var User = require('../models/user.js');
 
 // GET /
 router.get('/', function(req, res, next) {	
-	var itemsPerPage = 4;
+	var itemsPerPage = 10;
 	var page = req.query.page ? parseInt(req.query.page) : 0;
 	User.aggregate([
 		{ $match: { polls: { $gt: [] } } },			
 		{ $unwind: "$polls" },
+		{ $group: { 
+			_id: null,
+			polls: { $push: { pollName: "$polls.pollName", createdOn: "$polls.createdOn", _id: "$polls._id" } },
+			totalDocs: { $sum: 1 }
+		} },
+		{ $unwind: "$polls" },					
 		{ $sort: { "polls.createdOn": -1 } },
 		{ $skip: page * itemsPerPage },
 		{ $limit: itemsPerPage },
 		{ $project: {
 			_id: 0,
 			pollName: "$polls.pollName",
-			pollId: "$polls._id"		
+			pollId: "$polls._id",
+			totalDocs: 1		
 		} }
 	], function(err, docs) {
 		if (err) {
@@ -24,8 +31,7 @@ router.get('/', function(req, res, next) {
 			err.status = 500; // internal server error
 			next(err);
 		} else {			
-			console.log(docs);
-			res.render('index', { title: 'Home', userPolls: docs });
+			res.render('index', { title: 'Home', userPolls: docs, pageNumber: page, itemsPerPage: itemsPerPage, totalDocs: docs[0].totalDocs });
 		}	
 	});	
 });
