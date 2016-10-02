@@ -162,21 +162,32 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 });
 
 // POST /profile
-router.post('/profile', function(req, res) {
+router.post('/profile', mid.loggedIn, function(req, res, next) {
 	var formKeys = Object.keys(req.body);
-	var pollName = req.body[formKeys[0]];
-	var pollOptions = [];
-	for (var i = 1; i < formKeys.length; i++) {
-		pollOptions.push({
-			optionName: req.body[formKeys[i]]
-		});
+	var trimmedTitle = (req.body[formKeys[0]]).trim();
+
+	// trim keys, filter out empty strings
+	var processedFormKeys = formKeys.map(function(key) {
+		key = (req.body[key]).trim();
+		return key;		
+	}).filter(function(key) {
+		return key.length > 0;
+	});
+
+	if (trimmedTitle.length === 0 || processedFormKeys.length <= 2) {
+		// if trimmed title is an empty string or there isn't more
+		// than one voting option, call next(err)
+		var err = new Error('Please make sure title and options fields are filled out correctly.');
+		err.status = 400; // bad request
+		next(err);
+	} else {				
+		User.update({_id: req.session.userId}, {$push: {polls: {
+			pollName: trimmedTitle,
+			pollOptions: processedFormKeys.slice(1)
+		}}}, function() {
+			res.redirect('/');
+		});		
 	}
-	User.update({_id: req.session.userId}, {$push: {polls: {
-		pollName: pollName,
-		pollOptions: pollOptions
-	}}}, function() {
-		res.redirect('/');
-	});		
 });
 
 module.exports = router;
