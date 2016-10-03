@@ -5,14 +5,14 @@ block content
 		.col-xs-12.col-sm-6.pull-right
 			canvas#pollChart
 		.col-xs-12.col-sm-6.pull-left
-			form(method="POST", action="/poll/" + pollId)
+			form#voteForm(method="POST", action="/poll?" + "userId=" + userDoc._id + "&pollId=" + userDoc.polls[0]._id + "&optionId=")
 				.form-group
 					label(for="pollSelect") Select an Option
 					select#pollSelect(name="pollSelect", required)
-						for pollOption in pollOptions
-							option #{pollOption.optionName}
+						for pollOption in userDoc.polls[0].pollOptions
+							option(data-option-id=pollOption._id) #{pollOption.optionName}
 					button.btn.btn-info(type="submit") Vote!
 
 
 
-	script var singleUser = !{singleUser};
+	script var singleUser = !{userJSON};

@@ -53,15 +53,19 @@ router.get('/poll/:pollId', function(req, res, next) {
 				return poll._id == req.params.pollId;
 			});			
 			doc.polls = filteredPoll;
-			res.render('poll', { title: 'Poll', pollOptions: doc.polls[0].pollOptions, pollId: doc.polls[0]._id, singleUser: JSON.stringify(doc) });
+			res.render('poll', { title: 'Poll', userDoc: doc, userJSON: JSON.stringify(doc) });
 		}
 	});
 });
 
 // POST /poll:pollId
-router.post('/poll/:pollId', function(req, res, next) {
+router.post('/poll', function(req, res, next) {
+	var submittedVote = req.body.pollSelect;
 	console.log(req.body);
-	console.log(req.params);
+	console.log(req.query);
+	User.update({}, function(err, doc) {
+
+	});
 });
 
 // GET /register
