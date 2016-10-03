@@ -5,7 +5,13 @@ block content
 		.col-xs-12.col-sm-6.pull-right
 			canvas#pollChart
 		.col-xs-12.col-sm-6.pull-left
-			h2 Options go here.
+			form(method="POST", action="/poll")
+				.form-group
+					label(for="pollSelect") Select an Option
+					select#pollSelect(name="pollSelect", required)
+						for pollOption in pollOptions
+							option #{pollOption.optionName}
+
 
 
 	script var singleUser = !{singleUser};

@@ -47,13 +47,13 @@ router.get('/poll/:pollId', function(req, res, next) {
 			next(err);
 		} else {	
 			// remove the nested poll documents within the returned document 
-			// that do not have the _id passed as a route param
+			// that do not possess the _id specified in the route param
 			var unfilteredPolls = doc.polls;
 			var filteredPoll = unfilteredPolls.filter(function(poll) {
 				return poll._id == req.params.pollId;
 			});			
 			doc.polls = filteredPoll;
-			res.render('poll', { title: 'Poll', singleUser: JSON.stringify(doc) });
+			res.render('poll', { title: 'Poll', pollOptions: doc.polls[0].pollOptions, singleUser: JSON.stringify(doc) });
 		}
 	});
 });
