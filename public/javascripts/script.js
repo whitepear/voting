@@ -169,13 +169,3 @@
 	  return colour;
 	}
 	// end Chart.js code
-
-	// Form Submission Code
-	
-	// append selected option's _id to form's action attribute
-	$('#voteForm').submit(function(e) {		
-		var selectedOption = $('#pollSelect :selected').attr('data-option-id');
-		$('#voteForm').attr('action', function(i, val) {
-			return val + selectedOption;
-		});
-	});
