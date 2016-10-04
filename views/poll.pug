@@ -10,7 +10,7 @@ block content
 					label(for="pollSelect") Select an Option
 					select#pollSelect(name="pollSelect", required)
 						for pollOption in userDoc.polls[0].pollOptions
-							option() #{pollOption.optionName}
+							option #{pollOption.optionName}
 					button.btn.btn-info(type="submit") Vote!
 
 

@@ -58,13 +58,56 @@ router.get('/poll/:pollId', function(req, res, next) {
 	});
 });
 
-// POST /poll:pollId
-router.post('/poll', function(req, res, next) {
-	var submittedVote = req.body.pollSelect;
-	console.log(req.body);
-	console.log(req.query);
-	User.update({}, function(err, doc) {
+// POST /poll/:pollId
+router.post('/poll/:pollId', function(req, res, next) {		
+	var selectedOption = req.body.pollSelect;
+	var userDocId = req.query.userId;
+	var pollId = req.params.pollId;	
 
+	User.findOne({ _id: userDocId }, { polls: 1, _id: 0 }, function(err, doc) {
+		if (err) {
+			var err = new Error('"/poll/:pollId" findOne error.');
+			err.status = 500; // internal server error
+			next(err);
+		} else {
+			// the var pollId (above) has the _id of a particular document.
+			// use that _id to find the index of this document within the doc.polls array.
+			for (var i = 0; i < (doc.polls).length; i++) {
+				if ((doc.polls[i]._id).toString() === pollId) {
+					var pollDocIndex = i;
+					break;
+				}
+			}
+			// the var selectedOption (above) has the _id of a particular document.
+			// use that _id to find the index of this document within the
+			// doc.polls[pollDocIndex].pollOptions array.
+			for (i = 0; i < (doc.polls[pollDocIndex].pollOptions).length; i++) {
+				if (doc.polls[pollDocIndex].pollOptions[i].optionName === selectedOption) {
+					var optionDocIndex = i;
+					break;
+				}
+			}
+			
+			// call update to ensure atomic update (rather than .save)
+			// this inefficiency can be solved in future projects by better designed schemas
+			// and/or multiple collections		
+
+			// update document is programmatically constructed using the indices obtained
+			// via the for loops above.
+			var updateDocument = {};
+			updateDocument.$inc = {};
+			updateDocument.$inc['polls.' + pollDocIndex + '.pollOptions.' + optionDocIndex + '.votes'] = 1;
+			
+			User.update({ _id: userDocId }, updateDocument, function(err) {
+				if (err) {
+					var err = new Error('Poll vote update failed.');
+					err.status = 500; // internal server error
+					next(err);
+				} else {					
+					res.redirect('/poll/' + pollId);
+				}
+			});
+		}
 	});
 });
 
