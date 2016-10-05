@@ -217,26 +217,39 @@ router.post('/profile', mid.loggedIn, function(req, res, next) {
 	var formKeys = Object.keys(req.body);
 	var trimmedTitle = (req.body[formKeys[0]]).trim();
 
+	formKeys = formKeys.slice(1); // remove poll title from formKeys array
+
 	// trim keys, filter out empty strings
-	var processedFormKeys = formKeys.map(function(key) {
+	var trimmedFormKeys = formKeys.map(function(key) {
 		key = (req.body[key]).trim();
 		return key;		
 	}).filter(function(key) {
 		return key.length > 0;
 	});
+	
+	// filter out duplicate array entries, then place each entry
+	// within an object in order to match the schema
+	var seen = {};
+  var uniqueFormKeys = trimmedFormKeys.filter(function(key) {
+      return seen.hasOwnProperty(key) ? false : (seen[key] = true);
+  }).map(function(key) {
+  	return {
+			optionName: key
+  	};
+  });
 
-	if (trimmedTitle.length === 0 || processedFormKeys.length <= 2) {
+	if (trimmedTitle.length === 0 || uniqueFormKeys.length <= 1) {
 		// if trimmed title is an empty string or there isn't more
 		// than one voting option, call next(err)
-		var err = new Error('Please make sure title and options fields are filled out correctly.');
+		var err = new Error('Please make sure title and options fields are filled out correctly.\n Duplicate poll options will be ignored.');
 		err.status = 400; // bad request
 		next(err);
 	} else {				
 		User.update({_id: req.session.userId}, {$push: {polls: {
 			pollName: trimmedTitle,
-			pollOptions: processedFormKeys.slice(1)
+			pollOptions: uniqueFormKeys
 		}}}, function() {
-			res.redirect('/');
+			res.redirect('/profile');
 		});		
 	}
 });
