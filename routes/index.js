@@ -53,7 +53,7 @@ router.get('/poll/:pollId', function(req, res, next) {
 				return poll._id == req.params.pollId;
 			});			
 			doc.polls = filteredPoll;
-			res.render('poll', { title: 'Poll', userDoc: doc, userJSON: JSON.stringify(doc) });
+			res.render('poll', { title: 'Poll', userDoc: doc, logInStatus: req.session.userId, userJSON: JSON.stringify(doc) });
 		}
 	});
 });
@@ -100,7 +100,7 @@ router.post('/poll/:pollId', function(req, res, next) {
 			
 			User.update({ _id: userDocId }, updateDocument, function(err) {
 				if (err) {
-					var err = new Error('Poll vote update failed.');
+					var err = new Error('An error occurred while submitting your vote.');
 					err.status = 500; // internal server error
 					next(err);
 				} else {					
@@ -109,6 +109,19 @@ router.post('/poll/:pollId', function(req, res, next) {
 			});
 		}
 	});
+});
+
+// POST /addOption/:pollId
+router.post('/addOption/:pollId', mid.loggedIn, function(req, res, next) {
+	User.update({ "polls._id": req.params.pollId }, { $push: { "polls.$.pollOptions": { optionName: req.body.newOption } } }, function(err) {
+		if (err) {
+			var err = new Error('An error occurred while adding your option to the database.');
+			err.status = 500; // internal server error
+			next(err);
+		} else {
+			res.redirect('/poll/' + req.params.pollId);
+		}		
+	}); 
 });
 
 // GET /register
