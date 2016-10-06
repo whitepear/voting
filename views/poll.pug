@@ -5,6 +5,7 @@ block content
 		.col-xs-12.col-sm-6.pull-right
 			canvas#pollChart
 		.col-xs-12.col-sm-6.pull-left
+			p#voteLimitMsg Only one vote is allowed per poll. You have already voted.
 			form#voteForm(method="POST", action="/poll/" + userDoc.polls[0]._id + "?userId=" + userDoc._id)
 				.form-group
 					label(for="pollSelect") Select an Option

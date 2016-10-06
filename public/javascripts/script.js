@@ -169,3 +169,22 @@
 	  return colour;
 	}
 	// end Chart.js code
+	
+	// Form Submission Code
+	
+	$('#voteForm').submit(function(e) {
+		// check if user has voted already to ensure one poll-vote per user
+		
+		// extract the pollId from the form's action attribute
+		var actionString = $('#voteForm').attr('action');	// action attribute contains pollId, amongst other info	
+		var pollIdStart = actionString.lastIndexOf('/') + 1; // find the index at which the pollId starts
+		var pollIdEnd = actionString.indexOf('?'); // find the index at which the pollId ends
+		var pollId = actionString.slice(pollIdStart, pollIdEnd); // extract the pollId
+		
+		if(localStorage[pollId]) {
+			e.preventDefault();
+			$('#voteLimitMsg').show();
+		} else {
+			localStorage.setItem(pollId, 'voted');
+		}
+	});
