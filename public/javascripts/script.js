@@ -122,6 +122,18 @@
 	});
 
 
+	// Poll Delete Code
+
+	$('#myPollList').on('click', 'button', function(e) {		
+		var siblingLink = e.target.previousSibling.href; // sibling 'a' element contains pollId within href
+		var pollId = siblingLink.slice(siblingLink.lastIndexOf('/') + 1); // extract pollId from href string
+		// remove nested document that matches pollId via post
+		$.post('/delete/' + pollId, function(data) {
+			window.location = data;
+		});
+	});
+
+
 // ////////////////////////////////
 // POLL.PUG CODE
 
@@ -169,6 +181,7 @@
 	  return colour;
 	}
 	// end Chart.js code
+
 	
 	// Form Submission Code
 	

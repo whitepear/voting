@@ -60,6 +60,8 @@ router.get('/poll/:pollId', function(req, res, next) {
 
 // POST /poll/:pollId
 router.post('/poll/:pollId', function(req, res, next) {		
+	// this route adds one vote to a poll option within a poll
+
 	var selectedOption = req.body.pollSelect;
 	var userDocId = req.query.userId;
 	var pollId = req.params.pollId;	
@@ -113,6 +115,8 @@ router.post('/poll/:pollId', function(req, res, next) {
 
 // POST /addOption/:pollId
 router.post('/addOption/:pollId', mid.loggedIn, function(req, res, next) {
+	// this route adds a new option to a pre-existing poll
+
 	User.update({ "polls._id": req.params.pollId }, { $push: { "polls.$.pollOptions": { optionName: req.body.newOption } } }, function(err) {
 		if (err) {
 			var err = new Error('An error occurred while adding your option to the database.');
@@ -208,6 +212,8 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 	User.findById(req.session.userId)
 			.exec(function (err, user) {
 				if (err) {
+					var err = new Error('Error during GET /profile.');
+					err.status = 500; // internal server error
 					next(err);
 				} else {
 					var currentHour = (new Date()).getHours();
@@ -227,6 +233,8 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 
 // POST /profile
 router.post('/profile', mid.loggedIn, function(req, res, next) {
+	// this route creates a poll based on form info submitted by the user
+
 	var formKeys = Object.keys(req.body);
 	var trimmedTitle = (req.body[formKeys[0]]).trim();
 
@@ -265,6 +273,21 @@ router.post('/profile', mid.loggedIn, function(req, res, next) {
 			res.redirect('/profile');
 		});		
 	}
+});
+
+// POST /delete/:pollId
+router.post('/delete/:pollId', mid.loggedIn, function(req, res, next) {
+	// this route deletes a poll
+
+	User.update({ "polls._id": req.params.pollId }, { $pull: { polls: { _id: req.params.pollId } } }, function(err) {
+		if (err) {
+			var err = new Error('An error occurred during poll deletion.');
+			err.status = 500;
+			next(err);
+		} else {			
+			res.send('/profile');
+		}
+	});
 });
 
 module.exports = router;
