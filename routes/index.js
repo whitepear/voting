@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mid = require('../middleware');
 var User = require('../models/user.js');
+var bcrypt = require('bcryptjs');
 
 // GET /
 router.get('/', function(req, res, next) {	
@@ -179,7 +180,7 @@ router.post('/login', function(req, res, next) {
 		User.authenticate(req.body.username, req.body.password, function(err, user) {
 			if (err || !user) {
 				var err = new Error('Wrong username or password.');
-				err.status = 401;
+				err.status = 401; // Unauthorized
 				next(err);
 			} else {		
 				req.session.userId = user._id;
@@ -282,12 +283,55 @@ router.post('/delete/:pollId', mid.loggedIn, function(req, res, next) {
 	User.update({ "polls._id": req.params.pollId }, { $pull: { polls: { _id: req.params.pollId } } }, function(err) {
 		if (err) {
 			var err = new Error('An error occurred during poll deletion.');
-			err.status = 500;
+			err.status = 500; // internal server error
 			next(err);
 		} else {			
 			res.send('/profile');
 		}
 	});
+});
+
+// POST /passwordChange/:userId
+router.post('/passwordChange/:userId', mid.loggedIn, function(req, res, next) {
+	// this route changes user password
+	
+	// check that all fields have been filled out and that the new password inputs match
+	if (req.body.originalPassword && req.body.newPassword && req.body.newPasswordRepeat && req.body.newPassword === req.body.newPasswordRepeat) {
+		// check that the original password in the form is correct
+		User.authenticateWithId(req.params.userId, req.body.originalPassword, function(err, user) {
+			// check that authentication was successful
+			if (err || !user) {
+				var err = new Error('The original password provided is incorrect.');
+				err.status = 401; // Unauthorized
+				next(err);
+			} else {
+				// hash the new password
+				bcrypt.hash(req.body.newPassword, 10, function(err, hash) {
+					if (err) {
+						var err = new Error('Hash error during password update.');
+						err.status = 500; // internal server error
+						next(err);
+					} else {
+						// update the user document with the new hashed password
+						User.update({ _id: req.params.userId }, { password: hash }, function(err, numAffected) {
+							if (err) {
+								var err = new Error('An error occurred during password change.');
+								err.status = 500; // internal server error
+								next(err);
+							} else {
+								console.log(numAffected);
+								res.send('Password has successfully been changed.')
+							}
+						});
+					}
+				});				
+			}			
+		});
+	} else {
+		var err = new Error('Error: All fields must be completed, and/or new password must be the same in both fields.');
+		err.status = 400; // bad request
+		next(err);
+	}	
 });
 
 module.exports = router;
