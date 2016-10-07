@@ -110,6 +110,27 @@
 		$creationForm.hide();
 		$myPolls.show();
 	});
+	
+	
+	// this code handles showing/hiding
+	// the password change modal
+	var $modalBg = $('.modal-bg');
+	var $modal = $('.password-modal');
+
+	$('#passChange').click(function() {
+		if ($modalBg.hasClass('bg-active')) {
+			$modalBg.removeClass('bg-active');
+			$modal.removeClass('modal-active');
+		} else {
+			$modalBg.addClass('bg-active');
+			$modal.addClass('modal-active');
+		}
+	});
+
+	$('#closeModal').click(function() {
+		$modalBg.removeClass('bg-active');
+		$modal.removeClass('modal-active');
+	});
 
 
 	// Poll Creation Code
