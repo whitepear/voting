@@ -7,6 +7,7 @@ block content
 		button.btn.btn-success#profileCreatePoll(type="button") Create Poll	
 		button.btn.btn-info#profileMyPolls(type="button") My Polls
 		button.btn.btn-warning#passChange(type="button") Change My Password
+		#passMessage 
 
 	// Poll Creation
 	.col-xs-12#creationForm
@@ -36,7 +37,7 @@ block content
 		.password-modal
 			h1 Change your password
 			hr
-			form(method="POST", action="/passwordChange/" + userDoc._id)
+			form#passChangeForm(method="POST", action="/passwordChange/" + userDoc._id)
 				.form-group
 					label(for="originalPassword") Original Password
 					input.form-control#originalPassword(type="password", name="originalPassword", placeholder="Enter your original password", required)

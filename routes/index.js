@@ -303,23 +303,22 @@ router.post('/passwordChange/:userId', mid.loggedIn, function(req, res, next) {
 			if (err || !user) {
 				var err = new Error('The original password provided is incorrect.');
 				err.status = 401; // Unauthorized
-				next(err);
+				res.send(err.message);
 			} else {
 				// hash the new password
 				bcrypt.hash(req.body.newPassword, 10, function(err, hash) {
 					if (err) {
 						var err = new Error('Hash error during password update.');
 						err.status = 500; // internal server error
-						next(err);
+						res.send(err.message);
 					} else {
 						// update the user document with the new hashed password
 						User.update({ _id: req.params.userId }, { password: hash }, function(err, numAffected) {
 							if (err) {
 								var err = new Error('An error occurred during password change.');
 								err.status = 500; // internal server error
-								next(err);
+								res.send(err.message);
 							} else {
-								console.log(numAffected);
 								res.send('Password has successfully been changed.')
 							}
 						});
@@ -330,7 +329,7 @@ router.post('/passwordChange/:userId', mid.loggedIn, function(req, res, next) {
 	} else {
 		var err = new Error('Error: All fields must be completed, and/or new password must be the same in both fields.');
 		err.status = 400; // bad request
-		next(err);
+		res.send(err.message);
 	}	
 });
 

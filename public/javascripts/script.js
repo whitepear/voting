@@ -118,6 +118,7 @@
 	var $modal = $('.password-modal');
 
 	$('#passChange').click(function() {
+		$('#passMessage').hide();
 		if ($modalBg.hasClass('bg-active')) {
 			$modalBg.removeClass('bg-active');
 			$modal.removeClass('modal-active');
@@ -152,6 +153,17 @@
 		$.post('/delete/' + pollId, function(data) {
 			window.location = data;
 		});
+	});
+
+	// Modal Form Submission Code
+
+	$('#passChangeForm').submit(function(e) {
+		e.preventDefault();		
+		$.post($('#passChangeForm').attr('action'), $('#passChangeForm').serialize(), function(data) {
+			$('#passMessage').text(data).show();
+			$modalBg.removeClass('bg-active');
+			$modal.removeClass('modal-active');
+		});		
 	});
 
 
