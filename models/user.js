@@ -32,7 +32,30 @@ var UserSchema = new mongoose.Schema({
 });
 
 UserSchema.statics.authenticate = function(username, password, callback) {
+	// authenticate using username
 	User.findOne({ username: username })
+			.exec(function(err, user) {				
+				if (err) {
+					return callback(err);
+				} else if (!user) {					
+					var err = new Error('User not found.');
+					err.status = 401;
+					return callback(err);
+				}
+				// if no errors, use .compare to compare supplied pass with hashed ver.
+				bcrypt.compare(password, user.password, function(err, result) {					
+					if (result) {
+						return callback(null, user);						
+					} else {
+						return callback();
+					}
+				});
+			});
+}
+
+UserSchema.statics.authenticateWithId = function(userId, password, callback) {
+	// authenticate using userId
+	User.findOne({ _id: userId })
 			.exec(function(err, user) {				
 				if (err) {
 					return callback(err);
