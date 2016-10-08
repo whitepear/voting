@@ -54,7 +54,12 @@ router.get('/poll/:pollId', function(req, res, next) {
 				return poll._id == req.params.pollId;
 			});			
 			doc.polls = filteredPoll;
-			res.render('poll', { title: 'Poll', userDoc: doc, logInStatus: req.session.userId, userJSON: JSON.stringify(doc) });
+			// calculate total votes
+			var totalVotes = 0;
+			doc.polls[0].pollOptions.forEach(function(element) {
+				totalVotes += element.votes;
+			});
+			res.render('poll', { title: 'Poll', userDoc: doc, logInStatus: req.session.userId, totalVotes: totalVotes, userJSON: JSON.stringify(doc) });
 		}
 	});
 });
@@ -227,6 +232,12 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 					} else {
 						timeOfDay = 'tonight';
 					}
+					
+					// sort polls by date in descending order
+					user.polls = user.polls.sort(function(a, b) {
+						return b.createdOn - a.createdOn;
+					});
+
 					res.render('profile', {title: 'Profile', userDoc: user, timeOfDay: timeOfDay });
 				}
 			});

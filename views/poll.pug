@@ -5,6 +5,7 @@ block content
 		.col-xs-12.col-sm-6.pull-right
 			canvas#pollChart
 			p.text-center #{userDoc.polls[0].pollName}
+			p.text-center Total votes: #{totalVotes}
 		.col-xs-12.col-sm-6.pull-left
 			p#voteLimitMsg Only one vote is allowed per poll. You have already voted.
 			form#voteForm(method="POST", action="/poll/" + userDoc.polls[0]._id + "?userId=" + userDoc._id)
