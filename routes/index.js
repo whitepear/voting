@@ -144,7 +144,7 @@ router.get('/register', mid.loggedOut, function(req, res, next) {
 
 // POST /register
 router.post('/register', function (req, res, next) {	
-	if (req.body.username && req.body.email && req.body.password && req.body.confirmPassword) {
+	if (req.body.username && req.body.email && req.body.password.length > 7 && req.body.confirmPassword.length > 7) {
 		if (req.body.password !== req.body.confirmPassword) {
 			var err = new Error('The passwords provided do not match.');
 			err.status = 400; // bad request
@@ -171,7 +171,7 @@ router.post('/register', function (req, res, next) {
 			});
 		}
 	} else {
-		var err = new Error('Please fill out all form-fields before submission.');
+		var err = new Error('Please fill out all form-fields before submission.\n Ensure that your password is at least 8 characters long.');
 		err.status = 400; // bad request
 		next(err);
 	}
@@ -322,21 +322,21 @@ router.post('/passwordChange/:userId', mid.loggedIn, function(req, res, next) {
 		User.authenticateWithId(req.params.userId, req.body.originalPassword, function(err, user) {
 			// check that authentication was successful
 			if (err || !user) {
-				var err = new Error('The original password provided is incorrect.');
+				var err = new Error('Error: The original password provided is incorrect.');
 				err.status = 401; // Unauthorized
 				res.send(err.message);
 			} else {
 				// hash the new password
 				bcrypt.hash(req.body.newPassword, 10, function(err, hash) {
 					if (err) {
-						var err = new Error('Hash error during password update.');
+						var err = new Error('Error: Hash error during password update.');
 						err.status = 500; // internal server error
 						res.send(err.message);
 					} else {
 						// update the user document with the new hashed password
 						User.update({ _id: req.params.userId }, { password: hash }, function(err, numAffected) {
 							if (err) {
-								var err = new Error('An error occurred during password change.');
+								var err = new Error('Error: An error occurred during password change.');
 								err.status = 500; // internal server error
 								res.send(err.message);
 							} else {
@@ -348,7 +348,7 @@ router.post('/passwordChange/:userId', mid.loggedIn, function(req, res, next) {
 			}			
 		});
 	} else {
-		var err = new Error('Error: All fields must be completed, and/or new password must be the same in both fields.');
+		var err = new Error('Error: All fields must be completed correctly, and/or new password must be the same in both fields.');
 		err.status = 400; // bad request
 		res.send(err.message);
 	}	
