@@ -37,7 +37,6 @@ router.get('/', function(req, res, next) {
 	});	
 });
 
-// POST /
 
 // GET /poll
 router.get('/poll/:pollId', function(req, res, next) {
@@ -63,6 +62,7 @@ router.get('/poll/:pollId', function(req, res, next) {
 		}
 	});
 });
+
 
 // POST /poll/:pollId
 router.post('/poll/:pollId', function(req, res, next) {		
@@ -119,6 +119,7 @@ router.post('/poll/:pollId', function(req, res, next) {
 	});
 });
 
+
 // POST /addOption/:pollId
 router.post('/addOption/:pollId', mid.loggedIn, function(req, res, next) {
 	// this route adds a new option to a pre-existing poll
@@ -134,10 +135,12 @@ router.post('/addOption/:pollId', mid.loggedIn, function(req, res, next) {
 	}); 
 });
 
+
 // GET /register
 router.get('/register', mid.loggedOut, function(req, res, next) {
 	res.render('register', { title: 'Register' });
 });
+
 
 // POST /register
 router.post('/register', function (req, res, next) {	
@@ -174,10 +177,12 @@ router.post('/register', function (req, res, next) {
 	}
 });
 
+
 // GET /login
 router.get('/login', mid.loggedOut, function(req, res, next) {
 	res.render('login', { title: 'Login' });
 });
+
 
 // POST /login
 router.post('/login', function(req, res, next) {
@@ -199,6 +204,7 @@ router.post('/login', function(req, res, next) {
 	}
 });
 
+
 // GET /logout
 router.get('/logout', function(req, res, next) {
   if (req.session) {
@@ -212,6 +218,7 @@ router.get('/logout', function(req, res, next) {
     });
   }
 });
+
 
 // GET /profile
 router.get('/profile', mid.loggedIn, function(req, res, next) {	
@@ -242,6 +249,7 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 				}
 			});
 });
+
 
 // POST /profile
 router.post('/profile', mid.loggedIn, function(req, res, next) {
@@ -287,6 +295,7 @@ router.post('/profile', mid.loggedIn, function(req, res, next) {
 	}
 });
 
+
 // POST /delete/:pollId
 router.post('/delete/:pollId', mid.loggedIn, function(req, res, next) {
 	// this route deletes a poll
@@ -302,12 +311,13 @@ router.post('/delete/:pollId', mid.loggedIn, function(req, res, next) {
 	});
 });
 
+
 // POST /passwordChange/:userId
 router.post('/passwordChange/:userId', mid.loggedIn, function(req, res, next) {
 	// this route changes user password
 	
 	// check that all fields have been filled out and that the new password inputs match
-	if (req.body.originalPassword && req.body.newPassword && req.body.newPasswordRepeat && req.body.newPassword === req.body.newPasswordRepeat) {
+	if (req.body.originalPassword && req.body.newPassword.length > 7 && req.body.newPasswordRepeat.length > 7 && req.body.newPassword === req.body.newPasswordRepeat) {
 		// check that the original password in the form is correct
 		User.authenticateWithId(req.params.userId, req.body.originalPassword, function(err, user) {
 			// check that authentication was successful

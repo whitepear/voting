@@ -28,7 +28,7 @@ block content
 			.col-xs-12
 				a(href='poll/' + poll._id)
 					h3 #{poll.pollName}
-					h4 #{poll.createdOn}
+					h4 Created on: #{poll.createdOn.toString().slice(4, 15)}
 				button.btn.btn-danger Delete
 
 	// Password Change Modal
@@ -42,7 +42,7 @@ block content
 					label(for="originalPassword") Original Password
 					input.form-control#originalPassword(type="password", name="originalPassword", placeholder="Enter your original password", required)
 					label(for="newPassword") New Password
-					input.form-control#newPassword(type="password", name="newPassword", placeholder="Enter your new password", required)
+					input.form-control#newPassword(type="password", name="newPassword", placeholder="Minimum length of 8 characters required", required)
 					label(for="newPasswordRepeat") Repeat Your New Password
 					input.form-control#newPasswordRepeat(type="password", name="newPasswordRepeat", placeholder="Confirm your new password", required)
 					button.btn.btn-warning(type="submit") Submit Changes
