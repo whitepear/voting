@@ -65,7 +65,7 @@ router.get('/poll/:pollId', function(req, res, next) {
 
 
 // POST /poll/:pollId
-router.post('/poll/:pollId', function(req, res, next) {		
+router.post('/poll/:pollId', mid.sanitizeUserInput, function(req, res, next) {		
 	// this route adds one vote to a poll option within a poll
 
 	var selectedOption = req.body.pollSelect;
@@ -121,7 +121,7 @@ router.post('/poll/:pollId', function(req, res, next) {
 
 
 // POST /addOption/:pollId
-router.post('/addOption/:pollId', mid.loggedIn, function(req, res, next) {
+router.post('/addOption/:pollId', mid.loggedIn, mid.sanitizeUserInput, function(req, res, next) {
 	// this route adds a new option to a pre-existing poll
 
 	User.update({ "polls._id": req.params.pollId }, { $push: { "polls.$.pollOptions": { optionName: req.body.newOption } } }, function(err) {
@@ -143,7 +143,7 @@ router.get('/register', mid.loggedOut, function(req, res, next) {
 
 
 // POST /register
-router.post('/register', function (req, res, next) {	
+router.post('/register', mid.sanitizeUserInput, function (req, res, next) {	
 	if (req.body.username && req.body.email && req.body.password.length > 7 && req.body.confirmPassword.length > 7) {
 		if (req.body.password !== req.body.confirmPassword) {
 			var err = new Error('The passwords provided do not match.');
@@ -185,7 +185,7 @@ router.get('/login', mid.loggedOut, function(req, res, next) {
 
 
 // POST /login
-router.post('/login', function(req, res, next) {
+router.post('/login', mid.sanitizeUserInput, function(req, res, next) {
 	if (req.body.username && req.body.password) {
 		User.authenticate(req.body.username, req.body.password, function(err, user) {
 			if (err || !user) {
@@ -252,7 +252,7 @@ router.get('/profile', mid.loggedIn, function(req, res, next) {
 
 
 // POST /profile
-router.post('/profile', mid.loggedIn, function(req, res, next) {
+router.post('/profile', mid.loggedIn, mid.sanitizeUserInput, function(req, res, next) {
 	// this route creates a poll based on form info submitted by the user
 
 	var formKeys = Object.keys(req.body);
@@ -297,7 +297,7 @@ router.post('/profile', mid.loggedIn, function(req, res, next) {
 
 
 // POST /delete/:pollId
-router.post('/delete/:pollId', mid.loggedIn, function(req, res, next) {
+router.post('/delete/:pollId', mid.loggedIn, mid.sanitizeUserInput, function(req, res, next) {
 	// this route deletes a poll
 
 	User.update({ "polls._id": req.params.pollId }, { $pull: { polls: { _id: req.params.pollId } } }, function(err) {
@@ -313,7 +313,7 @@ router.post('/delete/:pollId', mid.loggedIn, function(req, res, next) {
 
 
 // POST /passwordChange/:userId
-router.post('/passwordChange/:userId', mid.loggedIn, function(req, res, next) {
+router.post('/passwordChange/:userId', mid.loggedIn, mid.sanitizeUserInput, function(req, res, next) {
 	// this route changes user password
 	
 	// check that all fields have been filled out and that the new password inputs match
