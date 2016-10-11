@@ -1,27 +1,35 @@
 extends layout
 
 block content
-	.splash-buffer
-	.splash-section
-		h1.splash-text 
-		if !currentUser
-			.reg-prompt 
-				p.reg-header Create custom polls with live results.
-				a.signup-btn.btn-lg(href="register") Sign Up &amp; Get Started
-		else
-			.reg-prompt
-				p.reg-header Start creating polls now!
-				a.signup-btn.btn-lg(href="profile") Create A Poll
-	.divider
-	.divider-two
-	.divider-three
-	.polls
-		h1 Polls.
-		each userPoll in userPolls
-			.col-xs-12.poll-item-container
+	.row
+		.col-xs-12.splash-buffer
+	.row
+		.col-xs-12.splash-section
+			h1.splash-text 
+			if !currentUser
+				.reg-prompt 
+					p.reg-header Create custom polls with live results.
+					a.signup-btn.btn-lg(href="register") Sign Up &amp; Get Started
+			else
+				.reg-prompt
+					p.reg-header Start creating polls now!
+					a.signup-btn.btn-lg(href="profile") Create A Poll
+	.row
+		.col-xs-12.divider
+	.row
+		.col-xs-12.divider-two
+	.row
+		.col-xs-12.divider-three
+	.row
+		.col-xs-12.polls
+			h1 Polls.
+	each userPoll in userPolls
+		.row
+			.col-xs-12.poll-item-container.white-bg
 				a.poll-item(href="poll/" + userPoll.pollId)
 					h2 #{userPoll.pollName}
-		.col-xs-12.btn-container.text-center
+	.row
+		.col-xs-12.btn-container.text-center.white-bg
 			if pageNumber > 0
 				a.btn.prev-btn.pull-left(href="/?page=" + (pageNumber - 1)) &lt;
 			span.text-center.page-span Page: #{pageNumber}
