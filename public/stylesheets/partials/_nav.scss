@@ -9,6 +9,7 @@
 	margin-right: 10px;
 	line-height: 55px; // vertically centers text
 	color: #fff;	
+	font-size: 20px;
 
 	&:hover {
 		cursor: pointer;
@@ -19,7 +20,7 @@
 
 .logo {
 	@extend .nav-option;
-	font-size: 26px;
+	font-size: 28px;
 	margin-left: 20px;
 	
 	&:hover {

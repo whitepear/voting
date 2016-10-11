@@ -1,6 +1,7 @@
 extends layout
 
 block content
+	.splash-buffer
 	.splash-section
 		h1.splash-text 
 		if !currentUser
@@ -12,14 +13,16 @@ block content
 				p.reg-header Start creating polls now!
 				a.signup-btn.btn-lg(href="profile") Create A Poll
 	.divider
-	.polls Polls.
-		hr
+	.divider-two
+	.divider-three
+	.polls
+		h1 Polls.
 		each userPoll in userPolls
-			.row
-				.col-xs-12.poll-item.text-center
-					a(href="poll/" + userPoll.pollId)
-						h3 #{userPoll.pollName}
-		if pageNumber > 0
-			a.btn.btn-info(href="/?page=" + (pageNumber - 1)) Prev
-		if !(((pageNumber * itemsPerPage) + itemsPerPage) >= totalDocs)
-			a.btn.btn-info(href="/?page=" + (pageNumber + 1)) Next
+			.col-xs-12.poll-item-container
+				a.poll-item(href="poll/" + userPoll.pollId)
+					h2 #{userPoll.pollName}
+		.col-xs-12.btn-container.text-center
+			if pageNumber > 0
+				a.btn.prev-btn.pull-left(href="/?page=" + (pageNumber - 1)) &lt;
+			if !(((pageNumber * itemsPerPage) + itemsPerPage) >= totalDocs)
+				a.btn.next-btn.pull-right(href="/?page=" + (pageNumber + 1)) &gt;
