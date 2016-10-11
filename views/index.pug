@@ -24,5 +24,6 @@ block content
 		.col-xs-12.btn-container.text-center
 			if pageNumber > 0
 				a.btn.prev-btn.pull-left(href="/?page=" + (pageNumber - 1)) &lt;
+			span.text-center.page-span Page: #{pageNumber}
 			if !(((pageNumber * itemsPerPage) + itemsPerPage) >= totalDocs)
 				a.btn.next-btn.pull-right(href="/?page=" + (pageNumber + 1)) &gt;

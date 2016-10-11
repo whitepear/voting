@@ -84,10 +84,6 @@
 	left: 40px;
 }
 
-.poll-item h2 {
-	display: inline-block;
-}
-
 .btn-container {
 	height: 125px;
 }
@@ -95,6 +91,11 @@
 .next-btn {
 	margin-top: 15px;
 	font-size: 50px;
+}
+.page-span {
+	font-size: 30px;
+	position: relative;
+	top: 35px;
 }
 
 .prev-btn {
