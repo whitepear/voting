@@ -25,11 +25,11 @@ block content
 			h1 Polls.
 	each userPoll in userPolls
 		.row
-			.col-xs-12.poll-item-container.white-bg
+			.col-xs-12.poll-item-container
 				a.poll-item(href="poll/" + userPoll.pollId)
 					h2 #{userPoll.pollName}
 	.row
-		.col-xs-12.btn-container.text-center.white-bg
+		.col-xs-12.btn-container.text-center
 			if pageNumber > 0
 				a.btn.prev-btn.pull-left(href="/?page=" + (pageNumber - 1)) &lt;
 			span.text-center.page-span Page: #{pageNumber}

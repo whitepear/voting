@@ -1,11 +1,12 @@
-.custom-nav
-	a.logo.pull-left Voht
-	if currentUser
-		a.nav-option.pull-right(href='/logout') Log Out
-	else 		
-		a.nav-option.pull-right(href="/login") Login
-	if currentUser	
-		a.nav-option.pull-right(href='/profile') Profile
-	else
-		a.nav-option.pull-right(href="/register") Register	
-	a.nav-option.pull-right(href="/") Home
+.row
+	.custom-nav.col-xs-12
+		a.logo.pull-left Voht
+		if currentUser
+			a.nav-option.pull-right(href='/logout') Log Out
+		else 		
+			a.nav-option.pull-right(href="/login") Login
+		if currentUser	
+			a.nav-option.pull-right(href='/profile') Profile
+		else
+			a.nav-option.pull-right(href="/register") Register	
+		a.nav-option.pull-right(href="/") Home
