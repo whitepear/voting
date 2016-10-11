@@ -139,7 +139,7 @@
 	var inputCounter = 3;
 
 	$('#addOption').click(function() {	
-		$('#optionGroup').append('<input class="form-control" id="pollOption' + inputCounter + '" type="text" name="pollOption' + inputCounter + '"></input>');
+		$('#optionGroup').append('<input class="form-control" placeholder="Add another option" id="pollOption' + inputCounter + '" type="text" name="pollOption' + inputCounter + '"></input>');
 		inputCounter++;
 	});
 

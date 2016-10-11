@@ -1,9 +1,54 @@
+.profile-greeting {
+	font-size: 72px;
+	margin-top: 85px;
+	margin-left: 20px;
+	margin-bottom: 30px;
+}
+
+.profile-sub-greeting {
+	font-size: 35px;
+	margin-bottom: 80px;
+	margin-left: 20px;
+}
+
+#profileCreatePoll, #profileMyPolls, #passChange {
+	display: block;
+	margin: 10px auto 10px;
+	font-size: 30px;
+	width: 324px;
+	margin-left: 200px;
+}
+
+#profileCreatePoll {
+	margin-top: 85px;
+}
+
 #passMessage {
 	display: none;
+	font-size: 32px;
+	text-align: center;
+	margin-bottom: 25px;
 }
 
 #creationForm {
 	display: none;
+}
+
+.profile-row {
+	border-bottom: 1px solid #eee;
+}
+
+.profile-row h2 {
+	padding-bottom: 5px;
+}
+
+.profile-row h4 {
+	padding-bottom: 20px;
+}
+
+.del-btn {
+	margin-top: 50px;
+	font-size: 20px;
 }
 
 .modal-bg {

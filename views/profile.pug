@@ -1,35 +1,46 @@
 extends layout
 
 block content	
-	.col-xs-12.text-center Hello, #{userDoc.username}!
-	.col-xs-12.text-center What would you like to do #{timeOfDay}?
-	.col-xs-12.text-center
-		button.btn.btn-success#profileCreatePoll(type="button") Create Poll	
-		button.btn.btn-info#profileMyPolls(type="button") My Polls
-		button.btn.btn-warning#passChange(type="button") Change My Password
-		#passMessage 
+	.row
+		.col-xs-12.col-sm-5
+			h1.profile-greeting Hello, #{userDoc.username}!
+			h3.profile-sub-greeting What would you like to do #{timeOfDay}?
+		.col-xs-12.col-sm-6.col-sm-offset-1
+			button.btn.btn-success#profileCreatePoll(type="button") Create Poll	
+			button.btn.btn-info#profileMyPolls(type="button") My Polls
+			button.btn.btn-warning#passChange(type="button") Change My Password
+	.row
+		.col-xs-12
+			#passMessage
+	.row
+		.col-xs-12.divider-two
+	.row
+		.col-xs-12.divider-three
 
 	// Poll Creation
-	.col-xs-12#creationForm
-		form(method="POST", action="/profile")
-			.form-group
-				label(for="pollName") Name your poll:
-				input.form-control#pollName(type="text", name="pollName", placeholder="What is your favourite color?", required)
-			.form-group#optionGroup
-				label(for="pollOption1") Enter options:
-				input.form-control#pollOption1(type="text", name="pollOption1", placeholder="Red", required)
-				input.form-control#pollOption2(type="text", name="pollOption2", placeholder="Blue", required)
-			button.btn.btn-default#addOption(type="button") Add Option			
-			button.btn.btn-info(type="submit") Submit
+	.row
+		.col-xs-12#creationForm
+			form(method="POST", action="/profile")
+				.form-group
+					label(for="pollName") Name your poll:
+					input.form-control#pollName(type="text", name="pollName", placeholder="What is your favourite color?", required)
+				.form-group#optionGroup
+					label(for="pollOption1") Enter options:
+					input.form-control#pollOption1(type="text", name="pollOption1", placeholder="Red", required)
+					input.form-control#pollOption2(type="text", name="pollOption2", placeholder="Blue", required)
+				button.btn.btn-default#addOption(type="button") Add Option			
+				button.btn.btn-info(type="submit") Submit
 
 	// My Polls
 	#myPollList
 		each poll in userDoc.polls
-			.col-xs-12
-				a(href='poll/' + poll._id)
-					h3 #{poll.pollName}
-					h4 Created on: #{poll.createdOn.toString().slice(4, 15)}
-				button.btn.btn-danger Delete
+			.row.profile-row
+				.col-xs-12.col-sm-6
+					a(href='poll/' + poll._id)
+						h2 #{poll.pollName}
+						h4 Created on: #{poll.createdOn.toString().slice(4, 15)}
+				.col-xs-12.col-sm-6
+					button.btn.btn-danger.pull-right.del-btn Delete
 
 	// Password Change Modal
 
