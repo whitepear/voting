@@ -116,23 +116,34 @@
 	// the password change modal
 	var $modalBg = $('.modal-bg');
 	var $modal = $('.password-modal');
+	var $body = $('body');
 
 	$('#passChange').click(function() {
 		$('#passMessage').hide();
-		if ($modalBg.hasClass('bg-active')) {
-			$modalBg.removeClass('bg-active');
-			$modal.removeClass('modal-active');
-		} else {
-			$modalBg.addClass('bg-active');
-			$modal.addClass('modal-active');
-		}
+		$modalBg.addClass('bg-active');
+		$modal.addClass('modal-active');
+		$body.addClass('open-modal-body');
 	});
 
 	$('#closeModal').click(function() {
 		$modalBg.removeClass('bg-active');
 		$modal.removeClass('modal-active');
+		$body.removeClass('open-modal-body');
 	});
 
+
+	// Modal Form Submission Code
+
+	$('#passChangeForm').submit(function(e) {
+		e.preventDefault();		
+		$.post($('#passChangeForm').attr('action'), $('#passChangeForm').serialize(), function(data) {
+			$('#passMessage').text(data).show();
+			$modalBg.removeClass('bg-active');
+			$modal.removeClass('modal-active');
+			$body.removeClass('open-modal-body');
+		});		
+	});
+	
 
 	// Poll Creation Code
 
@@ -153,17 +164,6 @@
 		$.post('/delete/' + pollId, function(data) {
 			window.location = data;
 		});
-	});
-
-	// Modal Form Submission Code
-
-	$('#passChangeForm').submit(function(e) {
-		e.preventDefault();		
-		$.post($('#passChangeForm').attr('action'), $('#passChangeForm').serialize(), function(data) {
-			$('#passMessage').text(data).show();
-			$modalBg.removeClass('bg-active');
-			$modal.removeClass('modal-active');
-		});		
 	});
 
 
