@@ -4,12 +4,22 @@
 	width: 400px; 
 }
 
+.poll-name {
+	font-size: 28px;
+	margin-top: 10px;
+}
+
+.poll-total-votes {
+	font-size: 24px;
+}
+
 #voteForm {
 	margin-top: 50px;
 }
 
 #voteLimitMsg {
 	display: none;
+	font-size: 24px;
 }
 
 #addForm {
