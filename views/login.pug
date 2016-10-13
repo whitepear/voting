@@ -3,12 +3,12 @@ extends layout
 block content
 	.row
 		.col-md-6.col-md-offset-3
-			h1 Login
+			h1.login-header Login
 			form(method="POST", action="/login")
 				.form-group
-					label(for="loginUsername") Enter your username:
-					input.form-control#loginUsername(type="text", placeholder="Enter your username", name="username", required)
+					label.custom-label(for="loginUsername") Enter your username:
+					input.custom-input.form-control#loginUsername(type="text", placeholder="Enter your username", name="username", required)
 				.form-group
-					label(for="loginPassword") Enter your password:
-					input.form-control#loginPassword(type="password", placeholder="Enter your password", name="password", required)
-				button.btn.btn-info(type="submit") Log In
+					label.custom-label(for="loginPassword") Enter your password:
+					input.custom-input.form-control#loginPassword(type="password", placeholder="Enter your password", name="password", required)
+				button.custom-form-btn.btn.btn-info(type="submit") Log In
