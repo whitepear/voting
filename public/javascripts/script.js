@@ -181,10 +181,6 @@
 		return pollOption.votes;
 	});
 
-	// var totalVotes = votes.reduce(function(prev, cur) {
-	// 	return prev += cur;
-	// });
-
 	var backgroundColours = optionNames.map(function() {
 		return randomColour();
 	});
