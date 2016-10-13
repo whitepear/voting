@@ -2,7 +2,6 @@
 @import 'partials/_index';
 @import 'partials/_profile';
 @import 'partials/_poll';
-@import 'partials/_login';
 
 html {
 	height: 100%;
@@ -21,6 +20,13 @@ body {
 	min-height: 80%;
 }
 
+.custom-header {
+	font-size: 48px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 25px;
+}
+
 .custom-label {
 	margin-bottom: 10px;
 	font-size: 22px;
@@ -33,6 +39,7 @@ body {
 }
 
 .custom-form-btn {
+	margin-top: 10px;
 	font-size: 18px;
 	margin-right: 10px;
 }
