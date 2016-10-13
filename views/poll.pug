@@ -2,25 +2,25 @@ extends layout
 
 block content
 	.row
-		.col-xs-12.col-sm-6.pull-right
+		.col-xs-12.col-sm-8.pull-right
 			canvas#pollChart
 			p.text-center #{userDoc.polls[0].pollName}
 			p.text-center Total votes: #{totalVotes}
-		.col-xs-12.col-sm-6.pull-left
-			p#voteLimitMsg Only one vote is allowed per poll. You have already voted.
+		.col-xs-12.col-sm-4.pull-left
 			form#voteForm(method="POST", action="/poll/" + userDoc.polls[0]._id + "?userId=" + userDoc._id)
+				p#voteLimitMsg Only one vote is allowed per poll. You have already voted.
 				.form-group
-					label(for="pollSelect") Select an Option
+					label.custom-label(for="pollSelect") Select an Option
 					select#pollSelect.form-control(name="pollSelect", required)
 						for pollOption in userDoc.polls[0].pollOptions
 							option #{pollOption.optionName}				
-				button.btn.btn-info(type="submit") Vote!
+				button.custom-form-btn.btn.btn-info(type="submit") Vote!
 			if (logInStatus)
 				form#addForm(method="POST", action="/addOption/" + userDoc.polls[0]._id)
 					.form-group
-						label(for="newOption") Add an Option
-						input#newOption.form-control(type="text", name="newOption")
-					button.btn.btn-info(type="submit") Add Option
+						label.custom-label(for="newOption") Add an Option
+						input#newOption.form-control(type="text", name="newOption", placeholder="New Option")
+					button.custom-form-btn.btn.btn-info(type="submit") Add Option
 
 	// destringify JSON, allowing chart.js access to doc
 	script var singleUser = !{userJSON}; 
