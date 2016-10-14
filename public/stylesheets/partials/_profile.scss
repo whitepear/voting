@@ -62,7 +62,7 @@ form[action="/profile"] {
 }
 
 .del-btn {
-	margin-top: 50px;
+	margin-top: 30px;
 	font-size: 20px;
 }
 
@@ -97,7 +97,7 @@ form[action="/profile"] {
 	margin: 50px auto 0;	
 	transition: opacity 0.7s, transform 0.55s ease-in-out;
 	transform: translateY(-300px);
-	width: 90%;
+	width: 97%;
 	max-width: 600px;
 	padding: 25px;
 }
@@ -125,4 +125,30 @@ form[action="/profile"] {
 	right: 2.5%;
 	font-size: 30px;
 	cursor: pointer;
+}
+
+
+// Medium Styles
+@media (min-width: 992px) and (max-width: 1199px) {
+	#profileCreatePoll, #profileMyPolls, #passChange {
+		margin-left: 100px;
+	}
+}
+
+// Small Styles
+@media (min-width: 768px) and (max-width: 991px) {
+	#profileCreatePoll, #profileMyPolls, #passChange {
+		margin-left: 0px;
+	}
+}
+
+// Extra Small Styles
+@media (max-width: 767px) {
+	#profileCreatePoll, #profileMyPolls, #passChange {
+		margin: 10px auto;
+	}
+
+	#passChange {
+		margin-bottom: 50px;
+	}
 }
