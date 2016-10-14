@@ -1,4 +1,19 @@
 // ////////////////////////////////
+// MOBILE MENU CODE
+	
+	var dropdownOpen = false;
+	$('.menu-div').click(function() {
+		if (dropdownOpen) {
+			$('.custom-dropdown-menu').hide();
+			dropdownOpen = false;
+		} else {
+			$('.custom-dropdown-menu').show();
+			dropdownOpen = true;
+		}
+	});
+	
+
+// ////////////////////////////////
 // INDEX.PUG CODE
 
 	// this code progressively prints out the text of baseString as

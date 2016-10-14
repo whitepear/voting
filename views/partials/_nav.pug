@@ -1,8 +1,9 @@
 nav.navbar.navbar-fixed-top
 	.custom-nav.container
 		span.logo.pull-left Voht
-		.menu-div.pull-right.visible-xs
-			span.menu-icon ☰			
+
+		// regular menu		
+		//					
 		ul.pull-right.nav.navbar-nav.hidden-xs
 			if currentUser
 				li.pull-right
@@ -18,3 +19,23 @@ nav.navbar.navbar-fixed-top
 					a.nav-option(href='/register') Register
 			li.pull-right
 				a.nav-option(href='/') Home
+
+		// dropdown menu
+		//
+		.menu-div.pull-right.visible-xs
+			span.menu-icon ☰
+		ul.custom-dropdown-menu.hidden-sm.hidden-md.hidden-lg
+			if currentUser
+				a(href='/logout')
+					li.custom-dropdown-item Log Out
+			else
+				a(href='/login')
+					li.custom-dropdown-item Login					 
+			if currentUser
+				a(href='/profile')
+					li.custom-dropdown-item Profile
+			else
+				a(href='/register')
+					li.custom-dropdown-item Register
+			a(href='/')
+				li.custom-dropdown-item Home

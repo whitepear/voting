@@ -9,16 +9,6 @@
 	line-height: 55px; // vertically centers text	
 }
 
-.menu-div {
-	display: inline-block;
-}
-
-.menu-icon {
-	color: #fff;
-	font-size: 26px;
-	line-height: 55px;
-}
-
 .nav-option {	
 	color: #fff;	
 	font-size: 20px;
@@ -38,4 +28,48 @@
 .nav > li > a:focus {
 	background: transparent;
 	color: #ddd;
+}
+
+
+// xs-nav styles
+
+.menu-div {
+	display: inline-block;
+	padding-left: 10px;
+	padding-right: 10px;
+	cursor: pointer;
+}
+
+.menu-icon {
+	color: #fff;
+	font-size: 32px;
+	line-height: 55px;
+}
+
+.custom-dropdown-menu {
+	display: none;
+	position: absolute;
+	text-align: right;
+	padding: 0px;
+	top: 100%;
+	right: 0%;
+	width: 100%;
+	max-width: 400px;
+	border-bottom: 5px solid #068BCC;
+}
+
+.custom-dropdown-menu a {
+	text-decoration: none;
+}
+
+.custom-dropdown-item {
+	list-style-type: none;
+	font-size: 32px;
+	border: 1px solid #ddd;
+	padding: 5px 25px 5px 0px;
+	background: #fff;
+
+	&:hover {
+		background: #eee;
+	}
 }
