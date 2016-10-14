@@ -100,3 +100,116 @@
 	margin-top: 15px;
 	font-size: 50px;	
 }
+
+// Medium Styles
+@media (min-width: 992px) and (max-width: 1199px) {
+	.splash-text {
+		font-size: 65px;
+	}
+
+	.reg-header {
+		font-size: 28px;
+	}
+
+	.signup-btn {
+		font-size: 22px;
+	}
+}
+
+// Small Styles
+@media (min-width: 768px) and (max-width: 991px) {
+	.splash-section {
+		background: #fff;
+	}
+
+	.splash-text {
+		font-size: 50px;
+	}
+
+	.index-splash-img {
+		margin: 80px auto 0px;
+	}
+	
+	.reg-prompt {
+		position: static;
+		text-align: center;
+		margin-top: 25px;
+	}
+
+	.reg-header {
+		font-size: 28px;
+	}
+
+	.signup-btn {
+		font-size: 22px;
+	}
+
+	.polls h1 {
+		font-size: 48px;
+	}
+
+	.poll-item-container h2 {
+		font-size: 26px;
+	}
+
+	.prev-btn {
+		font-size: 40px;
+	}
+
+	.page-span {
+		font-size: 26px;
+	}
+
+	.next-btn {
+		font-size: 40px;
+	}
+}
+
+// Extra Small Styles
+@media (max-width: 767px) {
+	.splash-section {
+		background: #fff;
+	}
+
+	.splash-text {
+		display: none;
+	}
+
+	.index-splash-img {				
+		margin: 0 auto;
+	}
+
+	.reg-prompt {
+		position: static;
+		text-align: center;
+		margin-top: 20px;
+	}
+
+	.reg-header {
+		font-size: 28px;
+	}
+
+	.signup-btn {
+		font-size: 22px;
+	}
+
+	.polls h1 {
+		font-size: 48px;
+	}
+
+	.poll-item-container h2 {
+		font-size: 26px;
+	}
+
+	.prev-btn {
+		font-size: 40px;
+	}
+
+	.page-span {
+		font-size: 26px;
+	}
+
+	.next-btn {
+		font-size: 40px;
+	}
+}
