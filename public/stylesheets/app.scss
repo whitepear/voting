@@ -47,3 +47,19 @@ body {
 	font-size: 18px;
 	margin-right: 10px;
 }
+
+// Small Styles
+@media (min-width: 768px) and (max-width: 991px) {
+	.container-extended {
+		min-height: 100%;
+		margin-bottom: 0px;
+	}
+}
+
+// Extra Small Styles
+@media (max-width: 767px) {
+	.container-extended {
+		min-height: 100%;
+		margin-bottom: 0px;
+	}
+}
