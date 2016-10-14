@@ -1,32 +1,31 @@
 .custom-nav {
 	background: #068BCC;
 	height: 55px;		
-	color: #fff;
-	position: fixed;
-	z-index: 3000;
-	width: 1170px;
 }
 
-.nav-option {
-	margin-left: 10px;
-	margin-right: 10px;
-	line-height: 55px; // vertically centers text
+.nav-option {	
 	color: #fff;	
 	font-size: 20px;
+	margin-top: 3px;	
+}
 
-	&:hover {
-		cursor: pointer;
-		color: #ddd;	
-		text-decoration: none;
-	}	
+.nav > li > a:hover {
+	background: transparent;
+	color: #eee;
+}
+
+.nav > li > a:active {
+	background: transparent;
+	color: #ddd;
+}
+
+.nav > li > a:focus {
+	background: transparent;
+	color: #ddd;
 }
 
 .logo {
-	@extend .nav-option;
+	color: #fff;
 	font-size: 28px;
-	
-	&:hover {
-		cursor: default;
-		color: #fff;
-	}
+	line-height: 55px; // vertically centers text	
 }
