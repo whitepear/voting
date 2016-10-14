@@ -1,12 +1,12 @@
 extends layout
 
 block content
-	.row
+	.row.first-row
 		.col-xs-12.col-sm-8.pull-right
 			canvas#pollChart
 			p.poll-name.text-center #{userDoc.polls[0].pollName}
 			p.poll-total-votes.text-center Total votes: #{totalVotes}
-		.col-xs-12.col-sm-4.pull-left
+		.col-xs-12.col-sm-4.pull-left.form-col
 			form#voteForm(method="POST", action="/poll/" + userDoc.polls[0]._id + "?userId=" + userDoc._id)
 				p#voteLimitMsg Only one vote is allowed per poll. You have already voted.
 				.form-group

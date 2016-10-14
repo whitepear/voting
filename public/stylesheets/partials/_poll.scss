@@ -25,3 +25,12 @@
 #addForm {
 	margin-top: 40px;
 }
+
+
+// Extra Small Styles
+@media (max-width: 767px) {
+	.form-col {
+		text-align: center;
+		margin-bottom: 100px;
+	}
+}
