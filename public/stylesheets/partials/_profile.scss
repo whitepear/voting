@@ -51,14 +51,18 @@ form[action="/profile"] {
 	border-bottom: 1px solid #eee;
 }
 
-.profile-row h2 {
-	padding-bottom: 5px;
+.profile-row a {
+	display: inline-block;
 	padding-left: 20px;
+	width: 70%;
+}
+
+.profile-row h2 {
+	padding-bottom: 5px;	
 }
 
 .profile-row h4 {
 	padding-bottom: 20px;
-	padding-left: 20px;
 }
 
 .del-btn {

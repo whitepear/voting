@@ -38,11 +38,10 @@ block content
 			h1.profile-poll-header Your Polls
 		each poll in userDoc.polls
 			.row.profile-row
-				.col-xs-6
+				.col-xs-12
 					a(href='poll/' + poll._id)
 						h2 #{poll.pollName}
 						h4 Created on: #{poll.createdOn.toString().slice(4, 15)}
-				.col-xs-6
 					button.btn.btn-danger.pull-right.del-btn Delete
 
 	// Password Change Modal
