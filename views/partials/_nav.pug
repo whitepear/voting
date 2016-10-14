@@ -1,8 +1,9 @@
 nav.navbar.navbar-fixed-top
 	.custom-nav.container
-		.navbar-header
-			span.logo Voht
-		ul.pull-right.nav.navbar-nav
+		span.logo.pull-left Voht
+		.menu-div.pull-right.visible-xs
+			span.menu-icon ☰			
+		ul.pull-right.nav.navbar-nav.hidden-xs
 			if currentUser
 				li.pull-right
 					a.nav-option(href='/logout') Log Out
