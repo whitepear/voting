@@ -306,7 +306,7 @@ router.post('/delete/:pollId', mid.loggedIn, mid.sanitizeUserInput, function(req
 			err.status = 500; // internal server error
 			next(err);
 		} else {			
-			res.send('/profile');
+			res.send('Poll deleted!');
 		}
 	});
 });

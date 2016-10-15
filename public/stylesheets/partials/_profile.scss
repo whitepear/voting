@@ -94,7 +94,7 @@ form[action="/profile"] {
 	width: 100%;
 }
 
-.password-modal {
+.custom-modal {
 	border-radius: 5px;	
 	opacity: 0;	
 	background: #fff;
@@ -129,6 +129,24 @@ form[action="/profile"] {
 	right: 2.5%;
 	font-size: 30px;
 	cursor: pointer;
+}
+
+#delPollConfirm {
+	display: block;
+	margin: 0 auto 10px;
+	font-size: 28px;
+}
+
+#delPollCancel {
+	display: block;
+	margin: 0 auto 5px;
+	font-size: 28px;
+	width: 166px;
+}
+
+.deleted-poll {
+	padding-left: 20px;
+	padding-bottom: 10px;
 }
 
 

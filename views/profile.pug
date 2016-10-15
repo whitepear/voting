@@ -44,10 +44,11 @@ block content
 						h4 Created on: #{poll.createdOn.toString().slice(4, 15)}
 					button.btn.btn-danger.pull-right.del-btn Delete
 
+
 	// Password Change Modal
 
-	.modal-bg
-		.password-modal
+	.modal-bg#passBg
+		.custom-modal#passModal
 			h1 Change your password
 			hr
 			form#passChangeForm(method="POST", action="/passwordChange/" + userDoc._id)
@@ -60,3 +61,13 @@ block content
 					input.custom-input.form-control#newPasswordRepeat(type="password", name="newPasswordRepeat", placeholder="Confirm your new password", required)
 					button.custom-form-btn.btn.btn-warning(type="submit") Submit Changes
 					div#closeModal X
+
+
+	// Poll Delete Modal
+
+	.modal-bg#delBg
+		.custom-modal#delModal
+			h1 Are you sure you want to delete this poll?
+			hr
+			button.btn.btn-danger#delPollConfirm Delete Poll
+			button.btn.btn-info#delPollCancel Cancel

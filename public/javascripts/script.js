@@ -129,36 +129,78 @@
 	
 	// this code handles showing/hiding
 	// the password change modal
-	var $modalBg = $('.modal-bg');
-	var $modal = $('.password-modal');
+	var $passBg = $('#passBg');
+	var $passModal = $('#passModal');
 	var $body = $('body');
 
 	$('#passChange').click(function() {
 		$('#passMessage').hide();
-		$modalBg.addClass('bg-active');
-		$modal.addClass('modal-active');
+		$passBg.addClass('bg-active');
+		$passModal.addClass('modal-active');
 		$body.addClass('open-modal-body');
 	});
 
 	$('#closeModal').click(function() {
-		$modalBg.removeClass('bg-active');
-		$modal.removeClass('modal-active');
+		$passBg.removeClass('bg-active');
+		$passModal.removeClass('modal-active');
 		$body.removeClass('open-modal-body');
 	});
 
 
-	// Modal Form Submission Code
+	// Password Modal Form Submission Code
 
 	$('#passChangeForm').submit(function(e) {
 		e.preventDefault();		
 		$.post($('#passChangeForm').attr('action'), $('#passChangeForm').serialize(), function(data) {
 			$('#passMessage').text(data).show();
-			$modalBg.removeClass('bg-active');
-			$modal.removeClass('modal-active');
+			$passBg.removeClass('bg-active');
+			$passModal.removeClass('modal-active');
 			$body.removeClass('open-modal-body');
 		});		
 	});
+
+
+	// Poll Delete Code
+
+	var $delBg = $('#delBg');
+	var $delModal = $('#delModal');
+	var siblingLink; // storage var for href of poll to be deleted
+	var pollId; // storage var for pollId extracted from above href
 	
+	// user clicks on delete button, get pollId of relevant poll, show confirmation modal
+	$('#myPollList').on('click', 'button', function(e) {		
+		siblingLink = e.target.previousSibling.href; // sibling 'a' element contains pollId within href
+		pollId = siblingLink.slice(siblingLink.lastIndexOf('/') + 1); // extract pollId from href string
+		$('#passMessage').hide(); // hide passMessage
+		// show the poll deletion modal
+		$delBg.addClass('bg-active');
+		$delModal.addClass('modal-active');
+		$body.addClass('open-modal-body');		
+	});
+	
+	// user cancels poll deletion via confirmation modal cancel button
+	$('#delPollCancel').click(function() {
+		$delBg.removeClass('bg-active');
+		$delModal.removeClass('modal-active');
+		$body.removeClass('open-modal-body');
+	});
+
+	// user confirms poll deletion via confirmation modal confirm button
+	$('#delPollConfirm').click(function() {
+		// remove nested document that matches pollId via post
+		$.post('/delete/' + pollId, function(data) {
+			$('#passMessage').text(data).show();
+			// if poll was successfully deleted, remove from My Polls list
+			if (data === 'Poll deleted!') {
+				$('a[href="poll/'+ pollId + '"]').next().remove(); // remove deletion button
+				$('a[href="poll/' + pollId + '"]').replaceWith('<h2 class="deleted-poll">Poll deleted.</h2>');
+			}
+			$delBg.removeClass('bg-active');
+			$delModal.removeClass('modal-active');
+			$body.removeClass('open-modal-body');
+		});
+	});
+
 
 	// Poll Creation Code
 
@@ -167,18 +209,6 @@
 	$('#addOption').click(function() {	
 		$('#optionGroup').append('<input class="custom-input form-control" placeholder="Add another option" id="pollOption' + inputCounter + '" type="text" name="pollOption' + inputCounter + '"></input>');
 		inputCounter++;
-	});
-
-
-	// Poll Delete Code
-
-	$('#myPollList').on('click', 'button', function(e) {		
-		var siblingLink = e.target.previousSibling.href; // sibling 'a' element contains pollId within href
-		var pollId = siblingLink.slice(siblingLink.lastIndexOf('/') + 1); // extract pollId from href string
-		// remove nested document that matches pollId via post
-		$.post('/delete/' + pollId, function(data) {
-			window.location = data;
-		});
 	});
 
 
