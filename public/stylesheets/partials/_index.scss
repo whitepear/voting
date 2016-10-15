@@ -103,6 +103,10 @@
 
 // Medium Styles
 @media (min-width: 992px) and (max-width: 1199px) {
+	.splash-section {
+		background: url(../../images/vote-splash-md.jpg);
+	}
+
 	.splash-text {
 		font-size: 65px;
 	}
@@ -127,7 +131,7 @@
 	}
 
 	.index-splash-img {
-		margin: 80px auto 0px;
+		margin: 65px auto 0px;
 	}
 	
 	.reg-prompt {
