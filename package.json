@@ -18,5 +18,8 @@
     "pug": "^2.0.0-beta6",
     "sanitize-html": "^1.13.0",
     "serve-favicon": "~2.3.0"
+  },
+  "engines": {
+    "node": "4.4.2"
   }
 }
