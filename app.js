@@ -11,7 +11,7 @@ var MongoStore = require('connect-mongo')(session); // require and call with ses
 var app = express();
 
 // mongodb connection
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/voht");
 var db = mongoose.connection;
 // mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
