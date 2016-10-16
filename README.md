@@ -1,8 +1,10 @@
+This project is live at: https://free-vote.herokuapp.com/
+
 FreeCodeCamp coursework: https://www.freecodecamp.com/challenges/build-a-voting-app
 
 Dynamic Web Application Project: Build a Voting App
 
-Built using Express, MongoDB, SASS and Pug (formerly known as Jade).
+Built using Express, MongoDB, SASS, Chart.js and Pug (formerly known as Jade).
 
 
 User Story: As an authenticated user, I can keep my polls and come back later to access them.  
