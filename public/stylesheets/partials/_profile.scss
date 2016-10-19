@@ -80,6 +80,7 @@ form[action="/profile"] {
   z-index: 1000;
   background: rgba(0, 0, 0, 0.0);    
   transition: background 0.5s;
+  overflow-y: auto;
 }
 
 .bg-active {
@@ -166,11 +167,46 @@ form[action="/profile"] {
 
 // Extra Small Styles
 @media (max-width: 767px) {
+	.profile-greeting {
+		margin-top: 30px;
+		margin-left: 0px;
+	}
+
+	.profile-sub-greeting {
+		margin-left: 0px;
+		margin-bottom: 40px;
+	}
+
 	#profileCreatePoll, #profileMyPolls, #passChange {
 		margin: 10px auto;
+		font-size: 24px;
+		width: 99%;
+		max-width: 355px;
 	}
 
 	#passChange {
 		margin-bottom: 50px;
 	}
+
+	.profile-row a {
+		padding-left: 0px;
+		width: 60%;
+	}
+
+	.del-btn {
+		margin-top: 20px;
+		font-size: 16px;
+	}
+
+	.custom-modal {
+		margin-top: 0px;
+	}
+
+	#closeModal {
+		right: 4.5%;
+	}
+	
+	.modal-active {
+		transform: translateY(80px);
+	}	
 }

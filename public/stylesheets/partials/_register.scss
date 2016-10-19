@@ -1,0 +1,6 @@
+// Extra Small Styles
+@media (max-width: 767px) {
+	form[action='/register'] {
+		margin-bottom: 30px;
+	}
+}

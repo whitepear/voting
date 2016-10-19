@@ -147,6 +147,10 @@
 	.polls h1 {
 		font-size: 48px;
 	}
+	
+	.poll-item-container {
+		padding: 20px 0px 20px 20px;
+	}
 
 	.poll-item-container h2 {
 		font-size: 26px;
@@ -167,6 +171,10 @@
 
 // Extra Small Styles
 @media (max-width: 767px) {
+	.splash-buffer {
+		height: 20px;
+	}
+
 	.splash-section {
 		background: #fff;
 	}
@@ -195,6 +203,11 @@
 
 	.polls h1 {
 		font-size: 48px;
+		padding-left: 0px;
+	}
+
+	.poll-item-container {
+		padding: 20px 0px 20px 15px;
 	}
 
 	.poll-item-container h2 {

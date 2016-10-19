@@ -24,7 +24,7 @@ block content
 			form(method="POST", action="/profile")
 				.form-group
 					label.custom-label(for="pollName") Name your poll:
-					input.custom-input.form-control#pollName(type="text", name="pollName", placeholder="What is your favourite colour?", required)
+					input.custom-input.form-control#pollName(type="text", name="pollName", placeholder="Favourite colour?", required)
 				.form-group#optionGroup
 					label.custom-label(for="pollOption1") Enter options:
 					input.custom-input.form-control#pollOption1(type="text", name="pollOption1", placeholder="Red", required)
@@ -54,11 +54,11 @@ block content
 			form#passChangeForm(method="POST", action="/passwordChange/" + userDoc._id)
 				.form-group
 					label.custom-label(for="originalPassword") Original Password
-					input.custom-input.form-control#originalPassword(type="password", name="originalPassword", placeholder="Enter your original password", required)
+					input.custom-input.form-control#originalPassword(type="password", name="originalPassword", placeholder="Enter original password", required)
 					label.custom-label(for="newPassword") New Password
-					input.custom-input.form-control#newPassword(type="password", name="newPassword", placeholder="Minimum length of 8 characters required", required)
+					input.custom-input.form-control#newPassword(type="password", name="newPassword", placeholder="8 character min. length", required)
 					label.custom-label(for="newPasswordRepeat") Repeat Your New Password
-					input.custom-input.form-control#newPasswordRepeat(type="password", name="newPasswordRepeat", placeholder="Confirm your new password", required)
+					input.custom-input.form-control#newPasswordRepeat(type="password", name="newPasswordRepeat", placeholder="Confirm new password", required)
 					button.custom-form-btn.btn.btn-warning(type="submit") Submit Changes
 					div#closeModal X
 
