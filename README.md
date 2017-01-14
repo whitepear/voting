@@ -1,17 +1,7 @@
 This project is live at: https://free-vote.herokuapp.com/
 
-FreeCodeCamp coursework: https://www.freecodecamp.com/challenges/build-a-voting-app
+Responsively-designed full-stack application that allows users to create and vote on persistent polls. Authenticated users can create polls with any number of options, or add new options to existing polls. Poll results are rendered in chart form, through the use of Chart.js.
 
-Dynamic Web Application Project: Build a Voting App
+The foundation of the server-side functionality is implemented in Express.js. Views are rendered by the Pug (formerly known as Jade) template engine, whilst a single MongoDB collection handles persistent storage. The app utilises the Mongoose ODM to implement a database schema, and to manage a significant portion of database-associated validation. Express-Session and Connect-Mongo manage session-storage within the database. User passwords are hashed and salted using bcrypt, whilst all user input is sanitized via Sanitize-Html. Sass is primarily used for the modular organisation of app-related stylesheets.
 
-Built using Express, MongoDB, SASS, Chart.js and Pug (formerly known as Jade).
-
-
-User Story: As an authenticated user, I can keep my polls and come back later to access them.  
-User Story: As an authenticated user, I can share my polls with my friends.  
-User Story: As an authenticated user, I can see the aggregate results of my polls.  
-User Story: As an authenticated user, I can delete polls that I decide I don't want anymore.  
-User Story: As an authenticated user, I can create a poll with any number of possible items.  
-User Story: As an unauthenticated or authenticated user, I can see and vote on everyone's polls.  
-User Story: As an unauthenticated or authenticated user, I can see the results of polls in chart form. (This could be implemented using Chart.js or Google Charts.)  
-User Story: As an authenticated user, if I don't like the options on a poll, I can create a new option.  
+Note: The live application (linked above) is hosted on Heroku. Please allow a few seconds for the hosting server to wake up when attempting to view it.
