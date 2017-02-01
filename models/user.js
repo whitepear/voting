@@ -79,7 +79,7 @@ UserSchema.pre('save', function (next) {
 	// mongoose assigns the db object to be inserted to 'this'
 	var user = this;
 
-	bcrypt.hash(user.password, 10, function(err, hash) {
+	bcrypt.hash(user.password, 12, function(err, hash) {
 		if (err) {
 			return next(err);
 		}
